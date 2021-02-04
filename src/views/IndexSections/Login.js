@@ -17,7 +17,7 @@
 */
 import React from "react";
 import classnames from "classnames";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -43,6 +43,36 @@ export default function Signup() {
   // const [fullNameFocus, setFullNameFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const history = useHistory();
+
+    const data = {
+        email: email,
+        password: password
+    }
+
+
+const handleLogin = (e) => {
+  e.preventDefault();
+
+  fetch("http://localhost:3001/users/login", {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data),   
+                })
+                .then(response => response.json())
+                .then(response => { 
+                  if(response.user?._id){
+                    history.push('./home-page')
+                  }
+                  else{
+                    console.log(response)
+                  }
+                }).catch(err => console.log(err))
+      }
+
+
   return (
     <div className="section section-signup">
       <Container>
@@ -80,23 +110,6 @@ export default function Signup() {
               </CardHeader>
               <CardBody>
                 <Form className="form">
-                  {/* <InputGroup
-                    className={classnames({
-                      "input-group-focus": fullNameFocus,
-                    })}
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="tim-icons icon-single-02" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Full Name"
-                      type="text"
-                      onFocus={(e) => setFullNameFocus(true)}
-                      onBlur={(e) => setFullNameFocus(false)}
-                    />
-                  </InputGroup> */}
                   <InputGroup
                     className={classnames({
                       "input-group-focus": emailFocus,
@@ -110,8 +123,10 @@ export default function Signup() {
                     <Input
                       placeholder="Email"
                       type="email"
+                      value={email}
                       onFocus={(e) => setEmailFocus(true)}
                       onBlur={(e) => setEmailFocus(false)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </InputGroup>
                   <InputGroup
@@ -127,8 +142,10 @@ export default function Signup() {
                     <Input
                       placeholder="Password"
                       type="password"
+                      value={password}
                       onFocus={(e) => setPasswordFocus(true)}
                       onBlur={(e) => setPasswordFocus(false)}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </InputGroup>
                   <FormGroup check className="text-left">
@@ -144,7 +161,7 @@ export default function Signup() {
                 </Form>
               </CardBody>
               <CardFooter>
-                <Button className="btn-round" color="primary" size="lg">
+                <Button onClick={handleLogin} className="btn-round" color="primary" size="lg">
                   Get Started
                 </Button>
               </CardFooter>
