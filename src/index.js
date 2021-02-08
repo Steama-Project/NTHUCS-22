@@ -26,10 +26,13 @@ import Index from "views/Index.js";
 import LandingPage from "views/examples/LandingPage.js";
 import Home from "views/IndexSections/Home";
 import Register from "views/IndexSections/Register";
+import {Provider } from 'react-redux'
+import store from './views/redux/store';
 
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
     <Switch>
       <Route path="/components" render={(props) => <Index {...props} />} />
         <Route
@@ -46,6 +49,8 @@ ReactDOM.render(
         />
         <Redirect from="/" to="/components" />
     </Switch>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>
+  ,
   document.getElementById("root")
 );
