@@ -164,14 +164,6 @@ export default function ExamplesNavbar({Register}) {
                 <i className="tim-icons icon-single-02" />         
                  Go to Register
               </Button>)}
-              {/* <Button
-                className="nav-link d-none d-lg-block"
-                color="primary"
-                tag={Link} to="/signin"
-              >
-                <i className="tim-icons icon-single-02" />         
-                 Back To Login
-              </Button> */}
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/">

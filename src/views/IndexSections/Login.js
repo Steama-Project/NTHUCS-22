@@ -19,6 +19,7 @@ import React from "react";
 import classnames from "classnames";
 import { Link, useHistory } from "react-router-dom";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+
 // reactstrap components
 import {
   Button,
@@ -31,6 +32,7 @@ import {
   Label,
   FormGroup,
   Form,
+  Modal,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -44,6 +46,8 @@ export default function Signup() {
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
   const [email, setEmail] = React.useState("");
+  const [demoModal, setDemoModal] = React.useState(false);
+  const [modalMessage, setmodalMessage] = React.useState({});
   const [password, setPassword] = React.useState("");
   const history = useHistory();
 
@@ -67,7 +71,9 @@ const handleLogin = (e) => {
                     history.push('./home-page')
                   }
                   else{
-                    console.log(response)
+                    setmodalMessage(response.message)
+                    setDemoModal(true);
+                    
                   }
                 }).catch(err => console.log(err))
       }
@@ -82,6 +88,35 @@ const handleLogin = (e) => {
         <div className="squares square-2" />
         <div className="squares square-3" />
         <div className="squares square-4" />
+              <Modal isOpen={demoModal} >
+                          
+                    <div className="modal-header justify-content-center">
+                        <button className="close" onClick={() => setDemoModal(false)}>
+                          <i className="tim-icons icon-simple-remove" />
+                        </button>
+                    <h4 className="title title-up">Login Error</h4>
+                         </div>
+                  <div className="modal-body">
+                      <p>
+                        {modalMessage}
+                      </p>
+                  </div>
+                  <div className="modal-footer">
+                        <Button color="neutral" type="button" style={{cursor:"default"}}>
+                          
+                        </Button>
+                      <Button
+                        color="danger"
+                        type="button"
+                        onClick={() => setDemoModal(false)}
+                      >
+                      Close
+                    </Button>
+                    <Button color="neutral" type="button" style={{cursor:"default"}}>
+                          
+                        </Button>
+                  </div> 
+                </Modal>
         <Row className="row-grid justify-content-between align-items-center">
           <Col lg="6">
             <h3 className="display-3 text-white">
