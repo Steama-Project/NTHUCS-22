@@ -41,6 +41,8 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useDispatch } from "react-redux";
+import setCurrentUser from '../redux/user/user-action'
 
 export default function Signup() {
   const [emailFocus, setEmailFocus] = React.useState(false);
@@ -50,6 +52,10 @@ export default function Signup() {
   const [modalMessage, setmodalMessage] = React.useState({});
   const [password, setPassword] = React.useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+
+
+  
 
     const data = {
         email: email,
@@ -68,6 +74,7 @@ const handleLogin = (e) => {
                 .then(response => response.json())
                 .then(response => { 
                   if(response.user?._id){
+                    dispatch(setCurrentUser(response.user))
                     history.push('./home-page')
                   }
                   else{

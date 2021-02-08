@@ -16,27 +16,17 @@
 
 */
 import React from "react";
-
-// // core components
-// import IndexNavbar from "components/Navbars/IndexNavbar.js";
-// import PageHeader from "components/PageHeader/PageHeader.js";
-// import Footer from "components/Footer/Footer.js";
-
-// // sections for this page/view
-// import Basics from "views/IndexSections/Basics.js";
-// import Navbars from "views/IndexSections/Navbars.js";
-// import Tabs from "views/IndexSections/Tabs.js";
-// import Pagination from "views/IndexSections/Pagination.js";
-// import Notifications from "views/IndexSections/Notifications.js";
-// import Typography from "views/IndexSections/Typography.js";
-// import JavaScript from "views/IndexSections/JavaScript.js";
-// import NucleoIcons from "views/IndexSections/NucleoIcons.js";
-// import Examples from "views/IndexSections/Examples.js";
-// import Download from "views/IndexSections/Download.js";
-// import Signup from "views/IndexSections/Signup.js";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "views/IndexSections/Login.js";
+import Home from "views/IndexSections/Home";
+import Register from "views/IndexSections/Register";
+import {selectCurrentUser} from './redux/user/user-selector';
+import { useSelector } from "react-redux";
 
 export default function Index() {
+
+  const currentUser = useSelector(state => selectCurrentUser(state));
+
   React.useEffect(() => {
     document.body.classList.toggle("index-page");
     // Specify how to clean up after this effect:
@@ -46,24 +36,15 @@ export default function Index() {
   },[]);
   return (
     <>
-      {/* <IndexNavbar /> */}
       <div className="wrapper">
-        {/* <PageHeader /> */}
         <div className="main">
-          {/* <Basics />
-          <Navbars />
-          <Tabs />
-          <Pagination />
-          <Notifications />
-          <Typography />
-          <JavaScript />
-          <NucleoIcons /> */}
-          {/* <Signup /> */}
-          <Login />
-          {/* <Examples />
-          <Download /> */}
+          <Switch>
+            <Route exact path="/components" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Login {...props} />)} /> 
+            <Route exact path="/home-page" render={(props) => <Home {...props} />}/>
+            <Route exact path="/register-page" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Register {...props} />)} />
+            <Redirect from="/" to="/components" />
+        </Switch>
         </div>
-        {/* <Footer /> */}
       </div>
     </>
   );
