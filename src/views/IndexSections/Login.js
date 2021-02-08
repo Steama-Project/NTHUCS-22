@@ -18,6 +18,7 @@
 import React from "react";
 import classnames from "classnames";
 import { Link, useHistory } from "react-router-dom";
+import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 // reactstrap components
 import {
   Button,
@@ -40,7 +41,6 @@ import {
 } from "reactstrap";
 
 export default function Signup() {
-  // const [fullNameFocus, setFullNameFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -74,6 +74,8 @@ const handleLogin = (e) => {
 
 
   return (
+    <>
+    <ExamplesNavbar />
     <div className="section section-signup">
       <Container>
         <div className="squares square-1" />
@@ -94,7 +96,7 @@ const handleLogin = (e) => {
               System.
             </p>
             <div className="btn-wrapper">
-              <Button color="primary" to="signup-page" tag={Link}>
+              <Button color="primary" to="register-page" tag={Link}>
                 Register Page
               </Button>
             </div>
@@ -109,7 +111,7 @@ const handleLogin = (e) => {
                 <CardTitle tag="h4">Login</CardTitle>
               </CardHeader>
               <CardBody>
-                <Form className="form">
+                <Form className="form"> 
                   <InputGroup
                     className={classnames({
                       "input-group-focus": emailFocus,
@@ -170,5 +172,6 @@ const handleLogin = (e) => {
         </Row>
       </Container>
     </div>
+    </>
   );
 }

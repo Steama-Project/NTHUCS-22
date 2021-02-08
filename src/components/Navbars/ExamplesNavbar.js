@@ -32,7 +32,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-export default function ExamplesNavbar() {
+export default function ExamplesNavbar({Register}) {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [collapseOut, setCollapseOut] = React.useState("");
   const [color, setColor] = React.useState("navbar-transparent");
@@ -70,11 +70,11 @@ export default function ExamplesNavbar() {
       <Container>
         <div className="navbar-translate">
           <NavbarBrand to="/" id="navbar-brand" tag={Link}>
-            <span>BLK• </span>
-            Design System React
+            <span>STEAMA• </span>
+            Project
           </NavbarBrand>
           <UncontrolledTooltip placement="bottom" target="navbar-brand">
-            Designed and Coded by Creative Tim
+            Redirecting to login
           </UncontrolledTooltip>
           <button
             aria-expanded={collapseOpen}
@@ -97,7 +97,7 @@ export default function ExamplesNavbar() {
             <Row>
               <Col className="collapse-brand" xs="6">
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  BLK•React
+                  STEMA•Project
                 </a>
               </Col>
               <Col className="collapse-close text-right" xs="6">
@@ -115,7 +115,7 @@ export default function ExamplesNavbar() {
             <NavItem className="p-0">
               <NavLink
                 data-placement="bottom"
-                href="https://twitter.com/CreativeTim"
+                href="https://twitter.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Follow us on Twitter"
@@ -127,7 +127,7 @@ export default function ExamplesNavbar() {
             <NavItem className="p-0">
               <NavLink
                 data-placement="bottom"
-                href="https://www.facebook.com/CreativeTim"
+                href="https://www.facebook.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Like us on Facebook"
@@ -139,7 +139,7 @@ export default function ExamplesNavbar() {
             <NavItem className="p-0">
               <NavLink
                 data-placement="bottom"
-                href="https://www.instagram.com/CreativeTimOfficial"
+                href="https://www.instagram.com"
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Follow us on Instagram"
@@ -149,23 +149,33 @@ export default function ExamplesNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <Button
+            {Register? (<Button
                 className="nav-link d-none d-lg-block"
                 color="primary"
-                target="_blank"
-                href="https://www.creative-tim.com/product/blk-design-system-pro-react?ref=bdsr-examples-navbar-upgrade-pro"
+                tag={Link} to="/signin"
               >
-                <i className="tim-icons icon-spaceship" /> Upgrade to PRO
-              </Button>
+                <i className="tim-icons icon-single-02" />         
+                 Back to Login
+              </Button>) : (<Button
+                className="nav-link d-none d-lg-block"
+                color="primary"
+                tag={Link} to="/register-page"
+              >
+                <i className="tim-icons icon-single-02" />         
+                 Go to Register
+              </Button>)}
+              {/* <Button
+                className="nav-link d-none d-lg-block"
+                color="primary"
+                tag={Link} to="/signin"
+              >
+                <i className="tim-icons icon-single-02" />         
+                 Back To Login
+              </Button> */}
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/">
-                Back to Kit
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/creativetimofficial/blk-design-system-react/issues">
-                Have an issue?
+                Report an issue?
               </NavLink>
             </NavItem>
           </Nav>
