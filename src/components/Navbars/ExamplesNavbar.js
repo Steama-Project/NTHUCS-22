@@ -51,7 +51,6 @@ export default function ExamplesNavbar({Register, Login}) {
   },[]);
 
   const handleLogout = (e) => {
-
       e.preventDefault();
       fetch("http://localhost:3001/users/logout", {
                     method: 'post',

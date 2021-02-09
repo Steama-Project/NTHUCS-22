@@ -110,6 +110,9 @@ const handleSubmit = (e) => {
                     else{
                         setmodalMessage(response.message)
                         setDemoModal(true);
+                        setPassword("");
+                        setEmail("");
+                        setFullName("");
                     }
                     
          }).catch(err => console.log(err))     
