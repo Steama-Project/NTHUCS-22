@@ -42,8 +42,8 @@ import {
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import setCurrentUser from '../redux/user/user-action'
 
 export default function RegisterPage() {
   const [squares1to6, setSquares1to6] = React.useState("");
@@ -56,8 +56,9 @@ export default function RegisterPage() {
   const [demoModal, setDemoModal] = React.useState(false);
   const [modalMessage, setmodalMessage] = React.useState({});
   
+  
   const [password, setPassword] = React.useState("");
-  const history = useHistory()
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     document.body.classList.toggle("register-page");
@@ -104,7 +105,7 @@ const handleSubmit = (e) => {
                   .then(response => response.json())
                   .then( response => {                      
                     if(response.user?._id){
-                      history.push('./home-page')
+                        dispatch(setCurrentUser(response));
                     }
                     else{
                         setmodalMessage(response.message)

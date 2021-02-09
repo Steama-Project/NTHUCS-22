@@ -18,7 +18,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "views/IndexSections/Login.js";
-import Home from "views/IndexSections/Home";
+import Home from "views/IndexSections/Home.js";
 import Register from "views/IndexSections/Register";
 import {selectCurrentUser} from './redux/user/user-selector';
 import { useSelector } from "react-redux";
@@ -40,7 +40,7 @@ export default function Index() {
         <div className="main">
           <Switch>
             <Route exact path="/components" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Login {...props} />)} /> 
-            <Route exact path="/home-page" render={(props) => <Home {...props} />}/>
+            <Route exact path="/home-page" render={(props) => currentUser? (<Home {...props}/> ) : (<Redirect to='/components' />)}/>
             <Route exact path="/register-page" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Register {...props} />)} />
             <Redirect from="/" to="/components" />
         </Switch>

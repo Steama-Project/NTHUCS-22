@@ -1,9 +1,10 @@
 import React from 'react'
+import Landing from '../examples/LandingPage'
 
 function Home() {
     return (
         <div>
-           <h1 > I am the home page </h1> 
+           <Landing/>
         </div>
     )
 }

@@ -17,7 +17,7 @@
 */
 import React from "react";
 import classnames from "classnames";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
 // reactstrap components
@@ -51,11 +51,7 @@ export default function Signup() {
   const [demoModal, setDemoModal] = React.useState(false);
   const [modalMessage, setmodalMessage] = React.useState({});
   const [password, setPassword] = React.useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
-
-
-  
 
     const data = {
         email: email,
@@ -74,8 +70,7 @@ const handleLogin = (e) => {
                 .then(response => response.json())
                 .then(response => { 
                   if(response.user?._id){
-                    dispatch(setCurrentUser(response.user))
-                    history.push('./home-page')
+                    dispatch(setCurrentUser(response))
                   }
                   else{
                     setmodalMessage(response.message)
@@ -85,10 +80,9 @@ const handleLogin = (e) => {
                 }).catch(err => console.log(err))
       }
 
-
   return (
     <>
-    <ExamplesNavbar />
+    <ExamplesNavbar Login/>
     <div className="section section-signup">
       <Container>
         <div className="squares square-1" />
