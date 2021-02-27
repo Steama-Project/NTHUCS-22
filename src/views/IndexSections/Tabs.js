@@ -30,6 +30,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Button,
 } from "reactstrap";
 
 export default function Tabs() {
@@ -38,16 +39,8 @@ export default function Tabs() {
   return (
     <div className="section section-tabs">
       <Container>
-        <div className="title">
-          <h3 className="mb-3">Navigation Tabs</h3>
-        </div>
         <Row>
           <Col className="ml-auto mr-auto" md="10" xl="6">
-            <div className="mb-3">
-              <small className="text-uppercase font-weight-bold">
-                With icons
-              </small>
-            </div>
             <Card>
               <CardHeader>
                 <Nav className="nav-tabs-info" role="tablist" tabs>
@@ -122,15 +115,13 @@ export default function Tabs() {
                     </p>
                   </TabPane>
                 </TabContent>
+                <Button 
+                  className="nav-link d-lg-block"
+                  color="primary"> Save </Button>
               </CardBody>
             </Card>
           </Col>
           <Col className="ml-auto mr-auto" md="10" xl="6">
-            <div className="mb-3">
-              <small className="text-uppercase font-weight-bold">
-                With text
-              </small>
-            </div>
             <Card>
               <CardHeader>
                 <Nav className="nav-tabs-info" role="tablist" tabs>
@@ -205,8 +196,11 @@ export default function Tabs() {
                       that ends up being worth billions of dollars, because I
                       got the answers. I understand culture. I am the nucleus.
                     </p>
-                  </TabPane>
+                  </TabPane>                     
                 </TabContent>
+                <Button 
+                  className="nav-link d-lg-block"
+                  color="primary"> Save </Button>
               </CardBody>
             </Card>
           </Col>

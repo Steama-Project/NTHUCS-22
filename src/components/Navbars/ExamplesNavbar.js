@@ -184,12 +184,13 @@ export default function ExamplesNavbar({Register, Login}) {
                 <i className="tim-icons icon-single-02" />         
                  Go to Register
               </Button>): (<Button
-                className="nav-link d-none d-lg-block"
-                color="primary"
+                className="nav-link d-lg-block"
+                color="danger"
                 onClick={handleLogout}
               >
-                <i className="tim-icons icon-single-02" />         
-                 Logout
+                &nbsp;
+                <i className="tim-icons icon-single-02"/>        
+                 Logout &nbsp;
               </Button>)}
             </NavItem>
             <NavItem>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Landing from '../examples/LandingPage'
+import Landing from '../examples/Landing'
 
 function Home() {
     return (
