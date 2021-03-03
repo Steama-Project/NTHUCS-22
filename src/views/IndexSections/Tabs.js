@@ -33,8 +33,11 @@ import {
   Button,
   FormGroup,
   Label,
+  Form,
   Input,
 } from "reactstrap";
+
+import Datetime from 'react-datetime';
 
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
@@ -89,9 +92,9 @@ export default function Tabs() {
                 </Nav>
               </CardHeader>
               <CardBody>
+              <Form className="form">
                 <TabContent className="tab-space" activeTab={"link" + iconTabs}>
                   <TabPane tabId="link1">
-                    <p>
                           <FormGroup>
                               <Label for="exampleSelect1">Sex</Label>
                               <Input type="select" name="select" id="exampleSelect1">
@@ -100,32 +103,38 @@ export default function Tabs() {
                                 <option>Others</option>
                               </Input>
                           </FormGroup>      
-                      <br />
+                      
+                          <FormGroup>
+                                <Label for="exampleSelect1">Date of Birth</Label>
+                                <Datetime
+                                    timeFormat={false}
+                                    inputProps={{placeholder:"Datetime Picker Here"}}
+                                />
+                            </FormGroup>   
+                          <FormGroup>
+                                  <Label for="exampleSelect1">City you live</Label>
+                                  <Input type="select" name="select" id="exampleSelect1">
+                                    <option>Hsinchu</option>
+                                    <option>Taipei</option>
+                                    <option>Taoyuan</option>
+                                  </Input>
+                        </FormGroup>  
+                        
+                        <FormGroup>
+                                <Label for="exampleSelect1">Typically developped children</Label>
+                                <Input type="select" name="select" id="exampleSelect1">
+                                  <option>Yes</option>
+                                  <option>No</option>
+                                </Input>
+                      </FormGroup> 
+                     
                       <FormGroup>
-                              <Label for="exampleSelect1">City you live</Label>
-                              <Input type="select" name="select" id="exampleSelect1">
-                                <option>Hsinchu</option>
-                                <option>Taipei</option>
-                                <option>Taoyuan</option>
-                              </Input>
-                     </FormGroup>  
-                      <br /> 
-                      <FormGroup>
-                              <Label for="exampleSelect1">Typically developped children</Label>
-                              <Input type="select" name="select" id="exampleSelect1">
-                                <option>Yes</option>
-                                <option>No</option>
-                              </Input>
-                     </FormGroup> 
-                     <br /> 
-                     <FormGroup>
-                              <Label for="exampleSelect1">Children with special needs</Label>
-                              <Input type="select" name="select" id="exampleSelect1">
-                                <option>Yes</option>
-                                <option>No</option>
-                              </Input>
-                     </FormGroup> 
-                    </p>
+                                <Label for="exampleSelect1">Children with special needs</Label>
+                                <Input type="select" name="select" id="exampleSelect1">
+                                  <option>Yes</option>
+                                  <option>No</option>
+                                </Input>
+                      </FormGroup> 
                   </TabPane>
                   <TabPane tabId="link2">
                     <p>
@@ -147,7 +156,8 @@ export default function Tabs() {
                       functional solutions.
                     </p>
                   </TabPane>
-                </TabContent>
+                 </TabContent>
+                </Form>
                 <Button 
                   className="nav-link d-lg-block"
                   color="primary"> Save </Button>
