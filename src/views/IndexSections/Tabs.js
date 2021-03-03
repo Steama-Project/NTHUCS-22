@@ -31,6 +31,9 @@ import {
   NavItem,
   NavLink,
   Button,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 
 export default function Tabs() {
@@ -38,6 +41,9 @@ export default function Tabs() {
   const [textTabs, setTextTabs] = React.useState(4);
   return (
     <div className="section section-tabs">
+    <div>
+      
+    </div>
       <Container>
         <Row>
           <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -86,12 +92,39 @@ export default function Tabs() {
                 <TabContent className="tab-space" activeTab={"link" + iconTabs}>
                   <TabPane tabId="link1">
                     <p>
-                      Collaboratively administrate empowered markets via
-                      plug-and-play networks. Dynamically procrastinate B2C
-                      users after installed base benefits. <br />
+                          <FormGroup>
+                              <Label for="exampleSelect1">Sex</Label>
+                              <Input type="select" name="select" id="exampleSelect1">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                              </Input>
+                          </FormGroup>      
                       <br />
-                      Dramatically visualize customer directed convergence
-                      without revolutionary ROI.
+                      <FormGroup>
+                              <Label for="exampleSelect1">City you live</Label>
+                              <Input type="select" name="select" id="exampleSelect1">
+                                <option>Hsinchu</option>
+                                <option>Taipei</option>
+                                <option>Taoyuan</option>
+                              </Input>
+                     </FormGroup>  
+                      <br /> 
+                      <FormGroup>
+                              <Label for="exampleSelect1">Typically developped children</Label>
+                              <Input type="select" name="select" id="exampleSelect1">
+                                <option>Yes</option>
+                                <option>No</option>
+                              </Input>
+                     </FormGroup> 
+                     <br /> 
+                     <FormGroup>
+                              <Label for="exampleSelect1">Children with special needs</Label>
+                              <Input type="select" name="select" id="exampleSelect1">
+                                <option>Yes</option>
+                                <option>No</option>
+                              </Input>
+                     </FormGroup> 
                     </p>
                   </TabPane>
                   <TabPane tabId="link2">
