@@ -37,11 +37,19 @@ import {
   Input,
 } from "reactstrap";
 
-import Datetime from 'react-datetime';
+import ReactDatetime from "react-datetime";
 
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
   const [textTabs, setTextTabs] = React.useState(4);
+  const [sex, setSex] = React.useState("Male");
+  // const [date, setDate] = React.useState(new Date());
+  const [city, setCity] = React.useState("Hsinchu");
+  const [devChi, setDevChil] = React.useState("Yes");
+  const [speNeeds, setSpeNeeds] = React.useState("Yes");
+
+  console.log(city, devChi, speNeeds, sex);
+
   return (
     <div className="section section-tabs">
     <div>
@@ -97,23 +105,25 @@ export default function Tabs() {
                   <TabPane tabId="link1">
                           <FormGroup>
                               <Label for="exampleSelect1">Sex</Label>
-                              <Input type="select" name="select" id="exampleSelect1">
+                              <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value)}>
                                 <option>Male</option>
                                 <option>Female</option>
                                 <option>Others</option>
                               </Input>
                           </FormGroup>      
-                      
+
+                          
                           <FormGroup>
                                 <Label for="exampleSelect1">Date of Birth</Label>
-                                <Datetime
+                                <ReactDatetime      
                                     timeFormat={false}
-                                    inputProps={{placeholder:"Datetime Picker Here"}}
+                                    inputProps={{placeholder:"Select date",className: "form-control",}}
                                 />
-                            </FormGroup>   
+                            </FormGroup> 
+                           
                           <FormGroup>
                                   <Label for="exampleSelect1">City you live</Label>
-                                  <Input type="select" name="select" id="exampleSelect1">
+                                  <Input type="select" name="select" id="exampleSelect1" value={city} onChange={(e) => setCity(e.target.value)}>
                                     <option>Hsinchu</option>
                                     <option>Taipei</option>
                                     <option>Taoyuan</option>
@@ -122,15 +132,14 @@ export default function Tabs() {
                         
                         <FormGroup>
                                 <Label for="exampleSelect1">Typically developped children</Label>
-                                <Input type="select" name="select" id="exampleSelect1">
+                                <Input type="select" name="select" id="exampleSelect1" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
                                   <option>Yes</option>
                                   <option>No</option>
                                 </Input>
-                      </FormGroup> 
-                     
+                      </FormGroup>                
                       <FormGroup>
                                 <Label for="exampleSelect1">Children with special needs</Label>
-                                <Input type="select" name="select" id="exampleSelect1">
+                                <Input type="select" name="select" id="exampleSelect1" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
                                   <option>Yes</option>
                                   <option>No</option>
                                 </Input>
