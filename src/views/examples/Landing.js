@@ -45,9 +45,9 @@ export default function LandingPage() {
               <Col lg="12" md="0">
                 <Tabs/>
               </Col>
-              <Col lg="12" md="0">
+              {/* <Col lg="12" md="0">
                <Tabs/>
-              </Col>
+              </Col> */}
             </Row>
           </div>
         
