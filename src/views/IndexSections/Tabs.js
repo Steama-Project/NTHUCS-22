@@ -46,12 +46,18 @@ export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
   const [textTabs, setTextTabs] = React.useState(4);
   const [sex, setSex] = React.useState("Male");
-  // const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState("");
   const [city, setCity] = React.useState("Hsinchu");
   const [devChi, setDevChil] = React.useState("Yes");
   const [speNeeds, setSpeNeeds] = React.useState("Yes");
 
-  console.log(city, devChi, speNeeds, sex);
+
+  const handleChange =(e) => {
+    console.log(e.format("DD-MM-YYYY"));
+    setDate(e.format("DD-MM-YYYY"))
+  }
+
+  console.log(city, devChi, speNeeds, sex, date);
 
   return (
     <div className="section section-tabs">
@@ -121,6 +127,7 @@ export default function Tabs() {
                                 <ReactDatetime      
                                     timeFormat={false}
                                     inputProps={{placeholder:"Select date",className: "form-control",}}
+                                    onChange={handleChange}
                                 />
                             </FormGroup> 
                            
@@ -220,52 +227,6 @@ export default function Tabs() {
                   <TabPane tabId="link4">
                   <Table responsive>
                             <tbody>
-                                {/* <tr>
-                                    <td className="text-center">1</td>
-                                    <td>無法專注於細節的部分，或在做學校作業或其他活動時，出現粗心的錯誤</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>  
-
-                                <tr>
-                                    <td className="text-center">1</td>
-                                    <td>很難持續專注於工作或遊戲活動</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>  
-
-                                <tr>
-                                    <td className="text-center">1</td>
-                                    <td>看起來好像沒有在聽別人對他(她)說話的內容</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>  
-
-                                <tr>
-
-                                    <td className="text-center">1</td>
-                                    <td>看起來好像沒有在聽別人對他(她)說話的內容</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>  
-                                <tr>
-                                    <td className="text-center">1</td>
-                                    <td>看起來好像沒有在聽別人對他(她)說話的內容</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>  
-                                <tr>
-                                    <td className="text-center">1</td>
-                                    <td>看起來好像沒有在聽別人對他(她)說話的內容</td>                                  
-                                    <td className="text-right">  
-                                            <i className="tim-icons icon-minimal-left"></i>                                      
-                                    </td>
-                                </tr>   */}
                             </tbody>            
                                </Table>                      
                                           <Accordeon text={`打斷或干擾別人(例如：插嘴或打斷別人的遊戲)`} />                                    
