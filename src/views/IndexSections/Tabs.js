@@ -17,6 +17,8 @@
 */
 import React from "react";
 import classnames from "classnames";
+import { selectSections, selectSections2, selectSections3 } from '../redux/question/question-selector'
+import { useSelector } from "react-redux";
 // reactstrap components
 import {
   TabContent,
@@ -51,6 +53,9 @@ export default function Tabs() {
   const [devChi, setDevChil] = React.useState("Yes");
   const [speNeeds, setSpeNeeds] = React.useState("Yes");
 
+  const sections = useSelector(state => selectSections(state));
+  const sections2 = useSelector(state => selectSections2(state));
+  const sections3 = useSelector(state => selectSections3(state));
 
   const handleChange = (e) => {
     console.log(e.format("DD-MM-YYYY"));
@@ -82,30 +87,6 @@ export default function Tabs() {
                       Profile
                     </NavLink>
                   </NavItem>
-                  <NavItem>
-                    <NavLink
-                      className={classnames({
-                        active: iconTabs === 2,
-                      })}
-                      onClick={(e) => setIconsTabs(2)}
-                      href="#pablo"
-                    >
-                      <i className="tim-icons icon-settings-gear-63" />
-                      Settings
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      className={classnames({
-                        active: iconTabs === 3,
-                      })}
-                      onClick={(e) => setIconsTabs(3)}
-                      href="#pablo"
-                    >
-                      <i className="tim-icons icon-bag-16" />
-                      Options
-                    </NavLink>
-                  </NavItem>
                 </Nav>
               </CardHeader>
               <CardBody>
@@ -121,7 +102,6 @@ export default function Tabs() {
                         </Input>
                       </FormGroup>
 
-
                       <FormGroup>
                         <Label for="exampleSelect1">Date of Birth</Label>
                         <ReactDatetime
@@ -133,7 +113,7 @@ export default function Tabs() {
 
                       <FormGroup>
                         <Label for="exampleSelect1">City you live</Label>
-                        <Input type="select" name="select" id="exampleSelect1" value={city} onChange={(e) => setCity(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect2" value={city} onChange={(e) => setCity(e.target.value)}>
                           <option>Hsinchu</option>
                           <option>Taipei</option>
                           <option>Taoyuan</option>
@@ -142,38 +122,20 @@ export default function Tabs() {
 
                       <FormGroup>
                         <Label for="exampleSelect1">Typically developped children</Label>
-                        <Input type="select" name="select" id="exampleSelect1" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect3" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
                       </FormGroup>
+
                       <FormGroup>
                         <Label for="exampleSelect1">Children with special needs</Label>
-                        <Input type="select" name="select" id="exampleSelect1" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect4" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
                       </FormGroup>
-                    </TabPane>
-                    <TabPane tabId="link2">
-                      <p>
-                        Completely synergize resource taxing relationships via
-                        premier niche markets. Professionally cultivate one-to-one
-                      customer service with robust ideas. <br />
-                        <br />
-                      Dynamically innovate resource-leveling customer service
-                      for state of the art customer service.
-                    </p>
-                    </TabPane>
-                    <TabPane tabId="link3">
-                      <p>
-                        Efficiently unleash cross-media information without
-                        cross-media value. Quickly maximize timely deliverables
-                      for real-time schemas. <br />
-                        <br />
-                      Dramatically maintain clicks-and-mortar solutions without
-                      functional solutions.
-                    </p>
+                      
                     </TabPane>
                   </TabContent>
                 </Form>
@@ -195,7 +157,7 @@ export default function Tabs() {
                       onClick={(e) => setTextTabs(4)}
                       href="#pablo"
                     >
-                      Profile
+                      Part1
                     </NavLink>
                   </NavItem>
                   <NavItem>
@@ -206,7 +168,7 @@ export default function Tabs() {
                       onClick={(e) => setTextTabs(5)}
                       href="#pablo"
                     >
-                      Settings
+                      Part2
                     </NavLink>
                   </NavItem>
                   <NavItem>
@@ -217,7 +179,7 @@ export default function Tabs() {
                       onClick={(e) => setTextTabs(6)}
                       href="#pablo"
                     >
-                      Options
+                      Part3
                     </NavLink>
                   </NavItem>
                 </Nav>
@@ -225,42 +187,13 @@ export default function Tabs() {
               <CardBody>
                 <TabContent className="tab-space" activeTab={"link" + textTabs}>
                   <TabPane tabId="link4">
-                    <Table responsive>
-                      <tbody>
-                      </tbody>
-                    </Table>
-                    <Accordeon text={`打斷或干擾別人(例如：插嘴或打斷別人的遊戲)`} />
-                    <Table>
-                    </Table>
-                    <Accordeon text={`在遊戲中或團體活動中，無法排隊或等待輪流`} />
-                    <Table>
-                    </Table>
-                    <Accordeon text={`因自己犯的錯或不適當的行為而怪罪別人`} />
-                    <Table>
-                    </Table>
+                    {sections.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
                   </TabPane>
                   <TabPane tabId="link5">
-                    <p>
-                      I will be the leader of a company that ends up being worth
-                      billions of dollars, because I got the answers. I
-                      understand culture. I am the nucleus. I think that’s a
-                      responsibility that I have, to push possibilities, to show
-                      people, this is the level that things could be at. I think
-                      that’s a responsibility that I have, to push
-                      possibilities, to show people, this is the level that
-                      things could be at.
-                    </p>
+                    {sections2.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
                   </TabPane>
                   <TabPane tabId="link6">
-                    <p>
-                      I think that’s a responsibility that I have, to push
-                      possibilities, to show people, this is the level that
-                      things could be at. So when you get something that has the
-                      name Kanye West on it, it’s supposed to be pushing the
-                      furthest possibilities. I will be the leader of a company
-                      that ends up being worth billions of dollars, because I
-                      got the answers. I understand culture. I am the nucleus.
-                    </p>
+                    {sections3.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
                   </TabPane>
                 </TabContent>
                 <Button

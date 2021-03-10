@@ -9,13 +9,11 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     color: '#FFFFFFB3',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
   },
   icon: {
     verticalAlign: 'bottom',
@@ -24,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   col: {
     backgroundColor: '#171941',
+    borderBottom: '1px solid rgba(0, 0, 0, .125)',
   },
   details: {
     alignItems: 'center',
@@ -45,6 +44,7 @@ export default function DetailedAccordion({ text }) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {
+    event.preventDefault();
     setValue(event.target.value);
   };
 
@@ -72,12 +72,6 @@ export default function DetailedAccordion({ text }) {
             </RadioGroup>
           </FormControl>
         </AccordionDetails>
-        {/* <AccordionActions>
-          <Button size="small">Cancel</Button>
-          <Button size="small" color="primary">
-            Save
-          </Button>
-        </AccordionActions> */}
       </Accordion>
     </div>
   );
