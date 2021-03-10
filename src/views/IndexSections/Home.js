@@ -4,7 +4,7 @@ import Landing from '../examples/Landing'
 function Home() {
     return (
         <div>
-           <Landing/>
+            <Landing />
         </div>
     )
 }

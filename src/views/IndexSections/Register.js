@@ -55,8 +55,8 @@ export default function RegisterPage() {
   const [email, setEmail] = React.useState("");
   const [demoModal, setDemoModal] = React.useState(false);
   const [modalMessage, setmodalMessage] = React.useState({});
-  
-  
+
+
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
 
@@ -68,23 +68,23 @@ export default function RegisterPage() {
       document.body.classList.toggle("register-page");
       document.documentElement.removeEventListener("mousemove", followCursor);
     };
-  },[]);
+  }, []);
   const followCursor = (event) => {
     let posX = event.clientX - window.innerWidth / 2;
     let posY = event.clientY - window.innerWidth / 6;
     setSquares1to6(
       "perspective(500px) rotateY(" +
-        posX * 0.05 +
-        "deg) rotateX(" +
-        posY * -0.05 +
-        "deg)"
+      posX * 0.05 +
+      "deg) rotateX(" +
+      posY * -0.05 +
+      "deg)"
     );
     setSquares7and8(
       "perspective(500px) rotateY(" +
-        posX * 0.02 +
-        "deg) rotateX(" +
-        posY * -0.02 +
-        "deg)"
+      posX * 0.02 +
+      "deg) rotateX(" +
+      posY * -0.02 +
+      "deg)"
     );
   };
 
@@ -92,68 +92,68 @@ export default function RegisterPage() {
     name: fullName,
     email: email,
     password: password
-}
+  }
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     fetch("http://localhost:3001/users", {
-                      method: 'post',
-                      headers: {'Content-Type': 'application/json'},
-                      body: JSON.stringify(data),   
-                  })
-                  .then(response => response.json())
-                  .then( response => {                      
-                    if(response.user?._id){
-                        dispatch(setCurrentUser(response));
-                    }
-                    else{
-                        setmodalMessage(response.message)
-                        setDemoModal(true);
-                        setPassword("");
-                        setEmail("");
-                        setFullName("");
-                    }
-                    
-         }).catch(err => console.log(err))     
-    }
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (response.user?._id) {
+          dispatch(setCurrentUser(response));
+        }
+        else {
+          setmodalMessage(response.message)
+          setDemoModal(true);
+          setPassword("");
+          setEmail("");
+          setFullName("");
+        }
+
+      }).catch(err => console.log(err))
+  }
   return (
     <>
-      <ExamplesNavbar Register/>
+      <ExamplesNavbar Register />
       <div className="wrapper">
         <div className="page-header">
           <div className="page-header-image" />
-           <div className="content">
+          <div className="content">
             <Container>
-             <Modal isOpen={demoModal} >
-                          
-                          <div className="modal-header justify-content-center">
-                              <button className="close" onClick={() => setDemoModal(false)}>
-                                <i className="tim-icons icon-simple-remove" />
-                              </button>
-                          <h4 className="title title-up">Registering Error</h4>
-                               </div>
-                            <div className="modal-body">
-                                <p>
-                                {modalMessage}
-                                </p>
-                            </div>
-                            <div className="modal-footer">
-                                <Button color="neutral" type="button" style={{cursor:"default"}}>
-                                    
-                                </Button>
-                                <Button
-                                color="danger"
-                                type="button"
-                                onClick={() => setDemoModal(false)}
-                                >
-                                Close
+              <Modal isOpen={demoModal} >
+
+                <div className="modal-header justify-content-center">
+                  <button className="close" onClick={() => setDemoModal(false)}>
+                    <i className="tim-icons icon-simple-remove" />
+                  </button>
+                  <h4 className="title title-up">Registering Error</h4>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    {modalMessage}
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <Button color="neutral" type="button" style={{ cursor: "default" }}>
+
+                  </Button>
+                  <Button
+                    color="danger"
+                    type="button"
+                    onClick={() => setDemoModal(false)}
+                  >
+                    Close
                             </Button>
-                            <Button color="neutral" type="button" style={{cursor:"default"}}>
-                                
-                             </Button>
-                            </div> 
-                     </Modal>
+                  <Button color="neutral" type="button" style={{ cursor: "default" }}>
+
+                  </Button>
+                </div>
+              </Modal>
               <Row>
                 <Col className="offset-lg-0 offset-md-3" lg="5" md="6">
                   <div
@@ -188,11 +188,11 @@ const handleSubmit = (e) => {
                           </InputGroupAddon>
                           <Input
                             placeholder="Full Name"
-                            value = {fullName}
+                            value={fullName}
                             type="text"
                             onFocus={(e) => setFullNameFocus(true)}
                             onBlur={(e) => setFullNameFocus(false)}
-                            onChange = {(e) => setFullName(e.target.value)}
+                            onChange={(e) => setFullName(e.target.value)}
                           />
                         </InputGroup>
                         <InputGroup
@@ -211,7 +211,7 @@ const handleSubmit = (e) => {
                             type="email"
                             onFocus={(e) => setEmailFocus(true)}
                             onBlur={(e) => setEmailFocus(false)}
-                            onChange = {(e) => setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </InputGroup>
                         <InputGroup
@@ -230,7 +230,7 @@ const handleSubmit = (e) => {
                             value={password}
                             onFocus={(e) => setPasswordFocus(true)}
                             onBlur={(e) => setPasswordFocus(false)}
-                            onChange = {(e) => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                         </InputGroup>
                         <FormGroup check className="text-left">

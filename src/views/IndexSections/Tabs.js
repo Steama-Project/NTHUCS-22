@@ -52,7 +52,7 @@ export default function Tabs() {
   const [speNeeds, setSpeNeeds] = React.useState("Yes");
 
 
-  const handleChange =(e) => {
+  const handleChange = (e) => {
     console.log(e.format("DD-MM-YYYY"));
     setDate(e.format("DD-MM-YYYY"))
   }
@@ -61,9 +61,9 @@ export default function Tabs() {
 
   return (
     <div className="section section-tabs">
-    <div>
-      
-    </div>
+      <div>
+
+      </div>
       <Container>
         <Row>
           <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -109,75 +109,75 @@ export default function Tabs() {
                 </Nav>
               </CardHeader>
               <CardBody>
-              <Form className="form">
-                <TabContent className="tab-space" activeTab={"link" + iconTabs}>
-                  <TabPane tabId="link1" style={{color:"#525f7f"}}>
-                          <FormGroup>
-                              <Label for="exampleSelect1">Sex</Label>
-                              <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value)}>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Others</option>
-                              </Input>
-                          </FormGroup>      
-
-                          
-                          <FormGroup>
-                                <Label for="exampleSelect1">Date of Birth</Label>
-                                <ReactDatetime      
-                                    timeFormat={false}
-                                    inputProps={{placeholder:"Select date",className: "form-control",}}
-                                    onChange={handleChange}
-                                />
-                            </FormGroup> 
-                           
-                          <FormGroup>
-                                  <Label for="exampleSelect1">City you live</Label>
-                                  <Input type="select" name="select" id="exampleSelect1" value={city} onChange={(e) => setCity(e.target.value)}>
-                                    <option>Hsinchu</option>
-                                    <option>Taipei</option>
-                                    <option>Taoyuan</option>
-                                  </Input>
-                        </FormGroup>  
-                        
-                        <FormGroup>
-                                <Label for="exampleSelect1">Typically developped children</Label>
-                                <Input type="select" name="select" id="exampleSelect1" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
-                                  <option>Yes</option>
-                                  <option>No</option>
-                                </Input>
-                      </FormGroup>                
+                <Form className="form">
+                  <TabContent className="tab-space" activeTab={"link" + iconTabs}>
+                    <TabPane tabId="link1" style={{ color: "#525f7f" }}>
                       <FormGroup>
-                                <Label for="exampleSelect1">Children with special needs</Label>
-                                <Input type="select" name="select" id="exampleSelect1" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
-                                  <option>Yes</option>
-                                  <option>No</option>
-                                </Input>
-                      </FormGroup> 
-                  </TabPane>
-                  <TabPane tabId="link2">
-                    <p>
-                      Completely synergize resource taxing relationships via
-                      premier niche markets. Professionally cultivate one-to-one
+                        <Label for="exampleSelect1">Sex</Label>
+                        <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value)}>
+                          <option>Male</option>
+                          <option>Female</option>
+                          <option>Others</option>
+                        </Input>
+                      </FormGroup>
+
+
+                      <FormGroup>
+                        <Label for="exampleSelect1">Date of Birth</Label>
+                        <ReactDatetime
+                          timeFormat={false}
+                          inputProps={{ placeholder: "Select date", className: "form-control", }}
+                          onChange={handleChange}
+                        />
+                      </FormGroup>
+
+                      <FormGroup>
+                        <Label for="exampleSelect1">City you live</Label>
+                        <Input type="select" name="select" id="exampleSelect1" value={city} onChange={(e) => setCity(e.target.value)}>
+                          <option>Hsinchu</option>
+                          <option>Taipei</option>
+                          <option>Taoyuan</option>
+                        </Input>
+                      </FormGroup>
+
+                      <FormGroup>
+                        <Label for="exampleSelect1">Typically developped children</Label>
+                        <Input type="select" name="select" id="exampleSelect1" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
+                          <option>Yes</option>
+                          <option>No</option>
+                        </Input>
+                      </FormGroup>
+                      <FormGroup>
+                        <Label for="exampleSelect1">Children with special needs</Label>
+                        <Input type="select" name="select" id="exampleSelect1" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
+                          <option>Yes</option>
+                          <option>No</option>
+                        </Input>
+                      </FormGroup>
+                    </TabPane>
+                    <TabPane tabId="link2">
+                      <p>
+                        Completely synergize resource taxing relationships via
+                        premier niche markets. Professionally cultivate one-to-one
                       customer service with robust ideas. <br />
-                      <br />
+                        <br />
                       Dynamically innovate resource-leveling customer service
                       for state of the art customer service.
                     </p>
-                  </TabPane>
-                  <TabPane tabId="link3">
-                    <p>
-                      Efficiently unleash cross-media information without
-                      cross-media value. Quickly maximize timely deliverables
+                    </TabPane>
+                    <TabPane tabId="link3">
+                      <p>
+                        Efficiently unleash cross-media information without
+                        cross-media value. Quickly maximize timely deliverables
                       for real-time schemas. <br />
-                      <br />
+                        <br />
                       Dramatically maintain clicks-and-mortar solutions without
                       functional solutions.
                     </p>
-                  </TabPane>
-                 </TabContent>
+                    </TabPane>
+                  </TabContent>
                 </Form>
-                <Button 
+                <Button
                   className="nav-link d-lg-block"
                   color="primary"> Save </Button>
               </CardBody>
@@ -225,21 +225,19 @@ export default function Tabs() {
               <CardBody>
                 <TabContent className="tab-space" activeTab={"link" + textTabs}>
                   <TabPane tabId="link4">
-                  <Table responsive>
-                            <tbody>
-                            </tbody>            
-                               </Table>                      
-                                          <Accordeon text={`打斷或干擾別人(例如：插嘴或打斷別人的遊戲)`} />                                    
-                               <Table>
-                               </Table>                      
-                                          <Accordeon text={`在遊戲中或團體活動中，無法排隊或等待輪流`} />                                    
-                               <Table>
-                               </Table>                      
-                                          <Accordeon text={`因自己犯的錯或不適當的行為而怪罪別人`} />                                    
-                               <Table>
-                               
-
-                        </Table>
+                    <Table responsive>
+                      <tbody>
+                      </tbody>
+                    </Table>
+                    <Accordeon text={`打斷或干擾別人(例如：插嘴或打斷別人的遊戲)`} />
+                    <Table>
+                    </Table>
+                    <Accordeon text={`在遊戲中或團體活動中，無法排隊或等待輪流`} />
+                    <Table>
+                    </Table>
+                    <Accordeon text={`因自己犯的錯或不適當的行為而怪罪別人`} />
+                    <Table>
+                    </Table>
                   </TabPane>
                   <TabPane tabId="link5">
                     <p>
@@ -263,9 +261,9 @@ export default function Tabs() {
                       that ends up being worth billions of dollars, because I
                       got the answers. I understand culture. I am the nucleus.
                     </p>
-                  </TabPane>                     
+                  </TabPane>
                 </TabContent>
-                <Button 
+                <Button
                   className="nav-link d-lg-block"
                   color="primary"> Save </Button>
               </CardBody>

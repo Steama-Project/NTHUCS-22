@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect'
 
 //select the whole user state
 const selectUser = state => state.user;

@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,11 +23,13 @@ const useStyles = makeStyles((theme) => ({
     width: 20,
   },
   col: {
-    backgroundColor:'#171941',
+    backgroundColor: '#171941',
   },
-  details: {  
+  details: {
     alignItems: 'center',
-    
+    backgroundColor:'#32325d',
+    color: '#171941'
+
   },
   column: {
     flexBasis: '33.3%',
@@ -39,11 +40,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DetailedAccordion({text}) {
+export default function DetailedAccordion({ text }) {
   const classes = useStyles();
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  console.log(value);
 
   return (
-    
+
     <div className={classes.root}>
       <Accordion className={classes.root} >
         <AccordionSummary
@@ -55,23 +63,15 @@ export default function DetailedAccordion({text}) {
           <span> {text} </span>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
-          <div className={clsx(classes.column, classes.helper)}>
-            <Chip label="完全沒有" onDelete={() => {}} />
-          </div>
-
-          <div className={clsx(classes.column, classes.helper)}>
-            <Chip label="有一點點" onDelete={() => {}} />
-          </div>
-
-          <div className={clsx(classes.column, classes.helper)}>
-            <Chip label="還算不少" onDelete={() => {}} />
-          </div>
-
-          <div className={clsx(classes.column, classes.helper)}>
-            <Chip label="非常的多" onDelete={() => {}} />
-          </div>
+          <FormControl component="fieldset" >
+            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange} row>
+              <FormControlLabel value="female" control={<Radio />} label="完全沒有" />
+              <FormControlLabel value="male" control={<Radio />} label="有一點點" />
+              <FormControlLabel value="other" control={<Radio />} label="還算不少" />
+              <FormControlLabel value="both" control={<Radio />} label="非常的多" />
+            </RadioGroup>
+          </FormControl>
         </AccordionDetails>
-        <Divider />
         {/* <AccordionActions>
           <Button size="small">Cancel</Button>
           <Button size="small" color="primary">
