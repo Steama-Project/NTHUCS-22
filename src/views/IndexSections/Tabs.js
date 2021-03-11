@@ -37,7 +37,6 @@ import {
   Label,
   Form,
   Input,
-  Table,
 } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
@@ -81,7 +80,7 @@ export default function Tabs() {
                         active: iconTabs === 1,
                       })}
                       onClick={(e) => setIconsTabs(1)}
-                      href="#pablo"
+                      style={{cursor:"pointer"}}
                     >
                       <i className="tim-icons icon-spaceship" />
                       Profile
@@ -155,7 +154,7 @@ export default function Tabs() {
                         active: textTabs === 4,
                       })}
                       onClick={(e) => setTextTabs(4)}
-                      href="#pablo"
+                      style={{cursor:"pointer"}}
                     >
                       Part1
                     </NavLink>
@@ -166,7 +165,7 @@ export default function Tabs() {
                         active: textTabs === 5,
                       })}
                       onClick={(e) => setTextTabs(5)}
-                      href="#pablo"
+                      style={{cursor:"pointer"}}
                     >
                       Part2
                     </NavLink>
@@ -177,7 +176,7 @@ export default function Tabs() {
                         active: textTabs === 6,
                       })}
                       onClick={(e) => setTextTabs(6)}
-                      href="#pablo"
+                      style={{cursor:"pointer"}}
                     >
                       Part3
                     </NavLink>
