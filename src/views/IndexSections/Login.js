@@ -147,7 +147,7 @@ export default function Signup() {
                   <CardTitle tag="h4">Login</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Form className="form">
+                  <Form className="form" onSubmit={handleLogin}>
                     <InputGroup
                       className={classnames({
                         "input-group-focus": emailFocus,
@@ -196,13 +196,15 @@ export default function Signup() {
                       .
                     </Label>
                     </FormGroup>
+                    <Button  type='submit'  className="btn-round" color="primary" size="sm" style={{display:"none"}}>  
+                    </Button>
                   </Form>
                 </CardBody>
                 <CardFooter>
-                  <Button onClick={handleLogin} className="btn-round" color="primary" size="lg">
+                  <Button  onClick={handleLogin} className="btn-round" color="primary" size="lg">
                     Get Started
                 </Button>
-                </CardFooter>
+                </CardFooter>              
               </Card>
             </Col>
           </Row>

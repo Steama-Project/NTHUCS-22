@@ -175,7 +175,7 @@ export default function RegisterPage() {
                       <CardTitle tag="h4">Register</CardTitle>
                     </CardHeader>
                     <CardBody>
-                      <Form className="form">
+                      <Form className="form" onSubmit={handleSubmit}>
                         <InputGroup
                           className={classnames({
                             "input-group-focus": fullNameFocus,
@@ -246,6 +246,8 @@ export default function RegisterPage() {
                             .
                           </Label>
                         </FormGroup>
+                        <Button  type='submit'  className="btn-round" color="primary" size="sm" style={{display:"none"}}>  
+                        </Button>
                       </Form>
                     </CardBody>
                     <CardFooter>

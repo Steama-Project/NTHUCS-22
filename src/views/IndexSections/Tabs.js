@@ -41,6 +41,8 @@ import {
 
 import ReactDatetime from "react-datetime";
 import Accordeon from '../../components/accordeon/Accordeon'
+import { selectCurrentUser } from "views/redux/user/user-selector";
+
 
 
 export default function Tabs() {
@@ -56,12 +58,27 @@ export default function Tabs() {
   const sections2 = useSelector(state => selectSections2(state));
   const sections3 = useSelector(state => selectSections3(state));
 
+  const currentUser = useSelector(state => selectCurrentUser(state));
+  const {token }= currentUser;
+  console.log(token);
+
+
   const handleChange = (e) => {
     console.log(e.format("DD-MM-YYYY"));
     setDate(e.format("DD-MM-YYYY"))
   }
 
-  console.log(city, devChi, speNeeds, sex, date);
+  const saveQuestion = (e) => {
+    e.preventDefault();
+    const postData = [...sections,...sections2,...sections3]
+    fetch("http://localhost:3001/question", {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json', Authorization:`Bearer ${token}`},
+      body: JSON.stringify({questions : postData}),
+    })
+  }
+
+console.log(city, devChi, speNeeds, sex, date);
 
   return (
     <div className="section section-tabs">
@@ -83,7 +100,7 @@ export default function Tabs() {
                       style={{cursor:"pointer"}}
                     >
                       <i className="tim-icons icon-spaceship" />
-                      Profile
+                      Personal Information
                     </NavLink>
                   </NavItem>
                 </Nav>
@@ -91,10 +108,10 @@ export default function Tabs() {
               <CardBody>
                 <Form className="form">
                   <TabContent className="tab-space" activeTab={"link" + iconTabs}>
-                    <TabPane tabId="link1" style={{ color: "#525f7f" }}>
+                    <TabPane tabId="link1" style={{ color: "#525f7f" }}>                   
                       <FormGroup>
                         <Label for="exampleSelect1">Sex</Label>
-                        <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value) }>
                           <option>Male</option>
                           <option>Female</option>
                           <option>Others</option>
@@ -133,8 +150,7 @@ export default function Tabs() {
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
-                      </FormGroup>
-                      
+                      </FormGroup>                   
                     </TabPane>
                   </TabContent>
                 </Form>
@@ -185,19 +201,20 @@ export default function Tabs() {
               </CardHeader>
               <CardBody>
                 <TabContent className="tab-space" activeTab={"link" + textTabs}>
-                  <TabPane tabId="link4">
-                    {sections.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
+                  <TabPane tabId="link4">  
+                     {sections.map(({ questionText,questionId, id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}          
                   </TabPane>
                   <TabPane tabId="link5">
-                    {sections2.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
+                    {sections2.map(({ questionText, questionId,id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}
                   </TabPane>
                   <TabPane tabId="link6">
-                    {sections3.map(({ imageUrl, id, ...otherProps }) => (<Accordeon text={imageUrl} key={id} otherProps={otherProps} />))}
+                    {sections3.map(({ questionText,questionId, id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}
                   </TabPane>
                 </TabContent>
                 <Button
                   className="nav-link d-lg-block"
-                  color="primary"> Save </Button>
+                  color="primary"
+                  onClick={saveQuestion}> Save </Button>
               </CardBody>
             </Card>
           </Col>

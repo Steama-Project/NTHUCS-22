@@ -8,6 +8,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { useDispatch } from "react-redux";
+import updateQuestion from '../../views/redux/question/question-action'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,16 +41,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DetailedAccordion({ text }) {
+export default function DetailedAccordion({ text, section, questionId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState('');
+  const questionText = ["完全沒有", "有一點點", "還算不少", "非常的多" ]
+  const dispatch = useDispatch();
+  
 
   const handleChange = (event) => {
     event.preventDefault();
     setValue(event.target.value);
-  };
+    const answerValue = questionText[event.target.value - 1]
+    const answerKey = event.target.value
+    const data = {
+      answerKey,
+      answerValue,
+      section,
+      questionId
+    }
+    dispatch(updateQuestion(data));
 
-  console.log(value);
+  };
 
   return (
 
@@ -65,10 +78,10 @@ export default function DetailedAccordion({ text }) {
         <AccordionDetails className={classes.details}>
           <FormControl component="fieldset" >
             <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange} row>
-              <FormControlLabel value="female" control={<Radio />} label="完全沒有" />
-              <FormControlLabel value="male" control={<Radio />} label="有一點點" />
-              <FormControlLabel value="other" control={<Radio />} label="還算不少" />
-              <FormControlLabel value="both" control={<Radio />} label="非常的多" />
+              <FormControlLabel value="1" control={<Radio />} label="完全沒有" />
+              <FormControlLabel value="2" control={<Radio />} label="有一點點" />
+              <FormControlLabel value="3" control={<Radio />} label="還算不少" />
+              <FormControlLabel value="4" control={<Radio />} label="非常的多" />
             </RadioGroup>
           </FormControl>
         </AccordionDetails>
