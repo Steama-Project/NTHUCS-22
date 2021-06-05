@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#171941',
     borderBottom: '1px solid rgba(0, 0, 0, .125)',
   },
+  //rgba(0, 0, 0, .125)
   details: {
     alignItems: 'center',
     backgroundColor:'#32325d',

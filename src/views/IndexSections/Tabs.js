@@ -49,10 +49,10 @@ export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
   const [textTabs, setTextTabs] = React.useState(4);
   const [sex, setSex] = React.useState("Male");
-  const [date, setDate] = React.useState("");
+  const [dob, setDate] = React.useState("");
   const [city, setCity] = React.useState("Hsinchu");
-  const [devChi, setDevChil] = React.useState("Yes");
-  const [speNeeds, setSpeNeeds] = React.useState("Yes");
+  const [isDevelopingChild, setDevChil] = React.useState("Yes");
+  const [isChildWithNeeds, setSpeNeeds] = React.useState("Yes");
 
   const sections = useSelector(state => selectSections(state));
   const sections2 = useSelector(state => selectSections2(state));
@@ -60,11 +60,8 @@ export default function Tabs() {
 
   const currentUser = useSelector(state => selectCurrentUser(state));
   const {token }= currentUser;
-  console.log(token);
-
 
   const handleChange = (e) => {
-    console.log(e.format("DD-MM-YYYY"));
     setDate(e.format("DD-MM-YYYY"))
   }
 
@@ -78,7 +75,19 @@ export default function Tabs() {
     })
   }
 
-console.log(city, devChi, speNeeds, sex, date);
+  const saveInfo = (e) => {
+    e.preventDefault();
+    const postInfo = {sex, city, dob, isDevelopingChild, isChildWithNeeds}
+
+    fetch("http://localhost:3001/users/me", {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization:`Bearer ${token}`},
+      body: JSON.stringify(postInfo),
+    })
+
+  }
+
+console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
 
   return (
     <div className="section section-tabs">
@@ -138,7 +147,7 @@ console.log(city, devChi, speNeeds, sex, date);
 
                       <FormGroup>
                         <Label for="exampleSelect1">Typically developped children</Label>
-                        <Input type="select" name="select" id="exampleSelect3" value={speNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect3" value={isChildWithNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
@@ -146,7 +155,7 @@ console.log(city, devChi, speNeeds, sex, date);
 
                       <FormGroup>
                         <Label for="exampleSelect1">Children with special needs</Label>
-                        <Input type="select" name="select" id="exampleSelect4" value={devChi} onChange={(e) => setDevChil(e.target.value)}>
+                        <Input type="select" name="select" id="exampleSelect4" value={isDevelopingChild} onChange={(e) => setDevChil(e.target.value)}>
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
@@ -156,7 +165,8 @@ console.log(city, devChi, speNeeds, sex, date);
                 </Form>
                 <Button
                   className="nav-link d-lg-block"
-                  color="primary"> Save </Button>
+                  color="primary"
+                  onClick={saveInfo}> Save </Button>
               </CardBody>
             </Card>
           </Col>
