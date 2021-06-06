@@ -8,14 +8,7 @@ function Home() {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { user } = currentUser;
 
-  return (
-    <div>
-      {/* {
-            user._id==='60bbd424779539bdd8d08aed'?<Admin />  : <Landing />
-        } */}
-      <Admin />
-    </div>
-  );
+  return <div>{user.admin ? <Admin /> : <Landing />}</div>;
 }
 
 export default Home;
