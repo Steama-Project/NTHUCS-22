@@ -17,7 +17,11 @@
 */
 import React from "react";
 import classnames from "classnames";
-import { selectSections, selectSections2, selectSections3 } from '../redux/question/question-selector'
+import {
+  selectSections,
+  selectSections2,
+  selectSections3,
+} from "../redux/question/question-selector";
 import { useSelector } from "react-redux";
 // reactstrap components
 import {
@@ -40,10 +44,8 @@ import {
 } from "reactstrap";
 
 import ReactDatetime from "react-datetime";
-import Accordeon from '../../components/accordeon/Accordeon'
+import Accordeon from "../../components/accordeon/Accordeon";
 import { selectCurrentUser } from "views/redux/user/user-selector";
-
-
 
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
@@ -54,46 +56,49 @@ export default function Tabs() {
   const [isDevelopingChild, setDevChil] = React.useState("Yes");
   const [isChildWithNeeds, setSpeNeeds] = React.useState("Yes");
 
-  const sections = useSelector(state => selectSections(state));
-  const sections2 = useSelector(state => selectSections2(state));
-  const sections3 = useSelector(state => selectSections3(state));
+  const sections = useSelector((state) => selectSections(state));
+  const sections2 = useSelector((state) => selectSections2(state));
+  const sections3 = useSelector((state) => selectSections3(state));
 
-  const currentUser = useSelector(state => selectCurrentUser(state));
-  const {token }= currentUser;
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { token } = currentUser;
 
   const handleChange = (e) => {
-    setDate(e.format("DD-MM-YYYY"))
-  }
+    setDate(e.format("DD-MM-YYYY"));
+  };
 
   const saveQuestion = (e) => {
     e.preventDefault();
-    const postData = [...sections,...sections2,...sections3]
+    const postData = [...sections, ...sections2, ...sections3];
     fetch("http://localhost:3001/question", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json', Authorization:`Bearer ${token}`},
-      body: JSON.stringify({questions : postData}),
-    })
-  }
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ questions: postData }),
+    });
+  };
 
   const saveInfo = (e) => {
     e.preventDefault();
-    const postInfo = {sex, city, dob, isDevelopingChild, isChildWithNeeds}
+    const postInfo = { sex, city, dob, isDevelopingChild, isChildWithNeeds };
 
     fetch("http://localhost:3001/users/me", {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Authorization:`Bearer ${token}`},
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(postInfo),
-    })
+    });
+  };
 
-  }
-
-console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
+  console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
 
   return (
     <div className="section section-tabs">
-      <div>
-
-      </div>
+      <div></div>
       <Container>
         <Row>
           <Col className="ml-auto mr-auto" md="10" xl="6">
@@ -106,7 +111,7 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                         active: iconTabs === 1,
                       })}
                       onClick={(e) => setIconsTabs(1)}
-                      style={{cursor:"pointer"}}
+                      style={{ cursor: "pointer" }}
                     >
                       <i className="tim-icons icon-spaceship" />
                       Personal Information
@@ -116,11 +121,20 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
               </CardHeader>
               <CardBody>
                 <Form className="form">
-                  <TabContent className="tab-space" activeTab={"link" + iconTabs}>
-                    <TabPane tabId="link1" style={{ color: "#525f7f" }}>                   
+                  <TabContent
+                    className="tab-space"
+                    activeTab={"link" + iconTabs}
+                  >
+                    <TabPane tabId="link1" style={{ color: "#525f7f" }}>
                       <FormGroup>
                         <Label for="exampleSelect1">Sex</Label>
-                        <Input type="select" name="select" id="exampleSelect1" value={sex} onChange={(e) => setSex(e.target.value) }>
+                        <Input
+                          type="select"
+                          name="select"
+                          id="exampleSelect1"
+                          value={sex}
+                          onChange={(e) => setSex(e.target.value)}
+                        >
                           <option>Male</option>
                           <option>Female</option>
                           <option>Others</option>
@@ -131,14 +145,23 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                         <Label for="exampleSelect1">Date of Birth</Label>
                         <ReactDatetime
                           timeFormat={false}
-                          inputProps={{ placeholder: "Select date", className: "form-control", }}
+                          inputProps={{
+                            placeholder: "Select date",
+                            className: "form-control",
+                          }}
                           onChange={handleChange}
                         />
                       </FormGroup>
 
                       <FormGroup>
                         <Label for="exampleSelect1">City you live</Label>
-                        <Input type="select" name="select" id="exampleSelect2" value={city} onChange={(e) => setCity(e.target.value)}>
+                        <Input
+                          type="select"
+                          name="select"
+                          id="exampleSelect2"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                        >
                           <option>Hsinchu</option>
                           <option>Taipei</option>
                           <option>Taoyuan</option>
@@ -146,27 +169,47 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                       </FormGroup>
 
                       <FormGroup>
-                        <Label for="exampleSelect1">Typically developped children</Label>
-                        <Input type="select" name="select" id="exampleSelect3" value={isChildWithNeeds} onChange={(e) => setSpeNeeds(e.target.value)}>
+                        <Label for="exampleSelect1">
+                          Typically developped children
+                        </Label>
+                        <Input
+                          type="select"
+                          name="select"
+                          id="exampleSelect3"
+                          value={isChildWithNeeds}
+                          onChange={(e) => setSpeNeeds(e.target.value)}
+                        >
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
                       </FormGroup>
 
                       <FormGroup>
-                        <Label for="exampleSelect1">Children with special needs</Label>
-                        <Input type="select" name="select" id="exampleSelect4" value={isDevelopingChild} onChange={(e) => setDevChil(e.target.value)}>
+                        <Label for="exampleSelect1">
+                          Children with special needs
+                        </Label>
+                        <Input
+                          type="select"
+                          name="select"
+                          id="exampleSelect4"
+                          value={isDevelopingChild}
+                          onChange={(e) => setDevChil(e.target.value)}
+                        >
                           <option>Yes</option>
                           <option>No</option>
                         </Input>
-                      </FormGroup>                   
+                      </FormGroup>
                     </TabPane>
                   </TabContent>
                 </Form>
                 <Button
                   className="nav-link d-lg-block"
                   color="primary"
-                  onClick={saveInfo}> Save </Button>
+                  onClick={saveInfo}
+                >
+                  {" "}
+                  Save{" "}
+                </Button>
               </CardBody>
             </Card>
           </Col>
@@ -180,7 +223,7 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                         active: textTabs === 4,
                       })}
                       onClick={(e) => setTextTabs(4)}
-                      style={{cursor:"pointer"}}
+                      style={{ cursor: "pointer" }}
                     >
                       Part1
                     </NavLink>
@@ -191,7 +234,7 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                         active: textTabs === 5,
                       })}
                       onClick={(e) => setTextTabs(5)}
-                      style={{cursor:"pointer"}}
+                      style={{ cursor: "pointer" }}
                     >
                       Part2
                     </NavLink>
@@ -202,7 +245,7 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
                         active: textTabs === 6,
                       })}
                       onClick={(e) => setTextTabs(6)}
-                      style={{cursor:"pointer"}}
+                      style={{ cursor: "pointer" }}
                     >
                       Part3
                     </NavLink>
@@ -211,20 +254,72 @@ console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
               </CardHeader>
               <CardBody>
                 <TabContent className="tab-space" activeTab={"link" + textTabs}>
-                  <TabPane tabId="link4">  
-                     {sections.map(({ questionText,questionId, id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}          
+                  <TabPane tabId="link4">
+                    {sections.map(
+                      ({
+                        questionText,
+                        questionId,
+                        id,
+                        section,
+                        ...otherProps
+                      }) => (
+                        <Accordeon
+                          text={questionText}
+                          key={id}
+                          section={section}
+                          questionId={questionId}
+                          otherProps={otherProps}
+                        />
+                      )
+                    )}
                   </TabPane>
                   <TabPane tabId="link5">
-                    {sections2.map(({ questionText, questionId,id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}
+                    {sections2.map(
+                      ({
+                        questionText,
+                        questionId,
+                        id,
+                        section,
+                        ...otherProps
+                      }) => (
+                        <Accordeon
+                          text={questionText}
+                          key={id}
+                          section={section}
+                          questionId={questionId}
+                          otherProps={otherProps}
+                        />
+                      )
+                    )}
                   </TabPane>
                   <TabPane tabId="link6">
-                    {sections3.map(({ questionText,questionId, id, section, ...otherProps }) => (<Accordeon text={questionText} key={id} section = {section} questionId = {questionId} otherProps={otherProps} />))}
+                    {sections3.map(
+                      ({
+                        questionText,
+                        questionId,
+                        id,
+                        section,
+                        ...otherProps
+                      }) => (
+                        <Accordeon
+                          text={questionText}
+                          key={id}
+                          section={section}
+                          questionId={questionId}
+                          otherProps={otherProps}
+                        />
+                      )
+                    )}
                   </TabPane>
                 </TabContent>
                 <Button
                   className="nav-link d-lg-block"
                   color="primary"
-                  onClick={saveQuestion}> Save </Button>
+                  onClick={saveQuestion}
+                >
+                  {" "}
+                  Save{" "}
+                </Button>
               </CardBody>
             </Card>
           </Col>

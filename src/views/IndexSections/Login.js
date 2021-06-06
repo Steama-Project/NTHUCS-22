@@ -42,7 +42,7 @@ import {
   Col,
 } from "reactstrap";
 import { useDispatch } from "react-redux";
-import setCurrentUser from '../redux/user/user-action'
+import setCurrentUser from "../redux/user/user-action";
 
 export default function Signup() {
   const [emailFocus, setEmailFocus] = React.useState(false);
@@ -55,30 +55,28 @@ export default function Signup() {
 
   const data = {
     email: email,
-    password: password
-  }
-
+    password: password,
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     fetch("http://localhost:3001/users/login", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      method: "post",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         if (response.user?._id) {
-          dispatch(setCurrentUser(response))
-        }
-        else {
-          setmodalMessage(response.message)
+          dispatch(setCurrentUser(response));
+        } else {
+          setmodalMessage(response.message);
           setDemoModal(true);
-
         }
-      }).catch(err => console.log(err))
-  }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -89,8 +87,7 @@ export default function Signup() {
           <div className="squares square-2" />
           <div className="squares square-3" />
           <div className="squares square-4" />
-          <Modal isOpen={demoModal} >
-
+          <Modal isOpen={demoModal}>
             <div className="modal-header justify-content-center">
               <button className="close" onClick={() => setDemoModal(false)}>
                 <i className="tim-icons icon-simple-remove" />
@@ -98,24 +95,26 @@ export default function Signup() {
               <h4 className="title title-up">Login Error</h4>
             </div>
             <div className="modal-body">
-              <p>
-                {modalMessage}
-              </p>
+              <p>{modalMessage}</p>
             </div>
             <div className="modal-footer">
-              <Button color="neutral" type="button" style={{ cursor: "default" }}>
-
-              </Button>
+              <Button
+                color="neutral"
+                type="button"
+                style={{ cursor: "default" }}
+              ></Button>
               <Button
                 color="danger"
                 type="button"
                 onClick={() => setDemoModal(false)}
               >
                 Close
-                    </Button>
-              <Button color="neutral" type="button" style={{ cursor: "default" }}>
-
               </Button>
+              <Button
+                color="neutral"
+                type="button"
+                style={{ cursor: "default" }}
+              ></Button>
             </div>
           </Modal>
           <Row className="row-grid justify-content-between align-items-center">
@@ -125,16 +124,16 @@ export default function Signup() {
                 <span className="text-white">completed with examples</span>
               </h3>
               <p className="text-white mb-3">
-                The Design System comes with four pre-built pages to help you get
-                started faster. You can change the text and images and you're good
-                to go. More importantly, looking at them will give you a picture
-                of what you can built with this powerful Bootstrap 4 Design
-                System.
-            </p>
+                The Design System comes with four pre-built pages to help you
+                get started faster. You can change the text and images and
+                you're good to go. More importantly, looking at them will give
+                you a picture of what you can built with this powerful Bootstrap
+                4 Design System.
+              </p>
               <div className="btn-wrapper">
                 <Button color="primary" to="register-page" tag={Link}>
                   Register Page
-              </Button>
+                </Button>
               </div>
             </Col>
             <Col className="mb-lg-auto" lg="6">
@@ -192,19 +191,29 @@ export default function Signup() {
                         <span className="form-check-sign" />I agree to the{" "}
                         <a href="#pablo" onClick={(e) => e.preventDefault()}>
                           terms and conditions
-                      </a>
-                      .
-                    </Label>
+                        </a>
+                        .
+                      </Label>
                     </FormGroup>
-                    <Button  type='submit'  className="btn-round" color="primary" size="sm" style={{display:"none"}}>  
-                    </Button>
+                    <Button
+                      type="submit"
+                      className="btn-round"
+                      color="primary"
+                      size="sm"
+                      style={{ display: "none" }}
+                    ></Button>
                   </Form>
                 </CardBody>
                 <CardFooter>
-                  <Button  onClick={handleLogin} className="btn-round" color="primary" size="lg">
+                  <Button
+                    onClick={handleLogin}
+                    className="btn-round"
+                    color="primary"
+                    size="lg"
+                  >
                     Get Started
-                </Button>
-                </CardFooter>              
+                  </Button>
+                </CardFooter>
               </Card>
             </Col>
           </Row>

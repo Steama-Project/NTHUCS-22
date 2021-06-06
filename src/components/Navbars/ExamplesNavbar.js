@@ -16,10 +16,10 @@
 
 */
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import setCurrentUser from './../../views/redux/user/user-action';
-import {selectCurrentUser} from 'views/redux/user/user-selector';
+import setCurrentUser from "./../../views/redux/user/user-action";
+import { selectCurrentUser } from "views/redux/user/user-selector";
 import { useDispatch } from "react-redux";
 // reactstrap components
 import {
@@ -36,32 +36,36 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
-export default function ExamplesNavbar({Register, Login}) {
+export default function ExamplesNavbar({ Register, Login }) {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [collapseOut, setCollapseOut] = React.useState("");
   const [color, setColor] = React.useState("navbar-transparent");
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => selectCurrentUser(state));
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   React.useEffect(() => {
     window.addEventListener("scroll", changeColor);
     return function cleanup() {
       window.removeEventListener("scroll", changeColor);
     };
-  },[]);
+  }, []);
 
   const handleLogout = (e) => {
-      e.preventDefault();
-      fetch("http://localhost:3001/users/logout", {
-                    method: 'post',
-                    headers: {'Content-Type': 'application/json' , 'Authorization': `Bearer ${currentUser.token}`},
-                })
-                .then(response => response.json())
-                .then(response => { 
-                  console.log(response);
-                    dispatch(setCurrentUser(null))
-                }).catch(err => console.log(err))
-  }
+    e.preventDefault();
+    fetch("http://localhost:3001/users/logout", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${currentUser.token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        dispatch(setCurrentUser(null));
+      })
+      .catch((err) => console.log(err));
+  };
   const changeColor = () => {
     if (
       document.documentElement.scrollTop > 99 ||
@@ -169,29 +173,37 @@ export default function ExamplesNavbar({Register, Login}) {
               </NavLink>
             </NavItem>
             <NavItem>
-            {Register? (<Button
-                className="nav-link d-none d-lg-block"
-                color="primary"
-                tag={Link} to="/signin"
-              >
-                <i className="tim-icons icon-single-02" />         
-                 Back to Login
-              </Button>) : Login? (<Button
-                className="nav-link d-none d-lg-block"
-                color="primary"
-                tag={Link} to="/register-page"
-              >
-                <i className="tim-icons icon-single-02" />         
-                 Go to Register
-              </Button>): (<Button
-                className="nav-link d-lg-block"
-                color="danger"
-                onClick={handleLogout}
-              >
-                &nbsp;
-                <i className="tim-icons icon-single-02"/>        
-                 Logout &nbsp;
-              </Button>)}
+              {Register ? (
+                <Button
+                  className="nav-link d-none d-lg-block"
+                  color="primary"
+                  tag={Link}
+                  to="/signin"
+                >
+                  <i className="tim-icons icon-single-02" />
+                  Back to Login
+                </Button>
+              ) : Login ? (
+                <Button
+                  className="nav-link d-none d-lg-block"
+                  color="primary"
+                  tag={Link}
+                  to="/register-page"
+                >
+                  <i className="tim-icons icon-single-02" />
+                  Go to Register
+                </Button>
+              ) : (
+                <Button
+                  className="nav-link d-lg-block"
+                  color="danger"
+                  onClick={handleLogout}
+                >
+                  &nbsp;
+                  <i className="tim-icons icon-single-02" />
+                  Logout &nbsp;
+                </Button>
+              )}
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/">

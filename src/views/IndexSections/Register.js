@@ -43,7 +43,7 @@ import {
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import { useDispatch } from "react-redux";
-import setCurrentUser from '../redux/user/user-action'
+import setCurrentUser from "../redux/user/user-action";
 
 export default function RegisterPage() {
   const [squares1to6, setSquares1to6] = React.useState("");
@@ -55,7 +55,6 @@ export default function RegisterPage() {
   const [email, setEmail] = React.useState("");
   const [demoModal, setDemoModal] = React.useState(false);
   const [modalMessage, setmodalMessage] = React.useState({});
-
 
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
@@ -74,49 +73,48 @@ export default function RegisterPage() {
     let posY = event.clientY - window.innerWidth / 6;
     setSquares1to6(
       "perspective(500px) rotateY(" +
-      posX * 0.05 +
-      "deg) rotateX(" +
-      posY * -0.05 +
-      "deg)"
+        posX * 0.05 +
+        "deg) rotateX(" +
+        posY * -0.05 +
+        "deg)"
     );
     setSquares7and8(
       "perspective(500px) rotateY(" +
-      posX * 0.02 +
-      "deg) rotateX(" +
-      posY * -0.02 +
-      "deg)"
+        posX * 0.02 +
+        "deg) rotateX(" +
+        posY * -0.02 +
+        "deg)"
     );
   };
 
   const data = {
     name: fullName,
     email: email,
-    password: password
-  }
+    password: password,
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     fetch("http://localhost:3001/users", {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      method: "post",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     })
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         if (response.user?._id) {
           dispatch(setCurrentUser(response));
-        }
-        else {
-          setmodalMessage(response.message)
+        } else {
+          setmodalMessage(response.message);
           setDemoModal(true);
           setPassword("");
           setEmail("");
           setFullName("");
         }
-
-      }).catch(err => console.log(err))
-  }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <ExamplesNavbar Register />
@@ -125,8 +123,7 @@ export default function RegisterPage() {
           <div className="page-header-image" />
           <div className="content">
             <Container>
-              <Modal isOpen={demoModal} >
-
+              <Modal isOpen={demoModal}>
                 <div className="modal-header justify-content-center">
                   <button className="close" onClick={() => setDemoModal(false)}>
                     <i className="tim-icons icon-simple-remove" />
@@ -134,24 +131,26 @@ export default function RegisterPage() {
                   <h4 className="title title-up">Registering Error</h4>
                 </div>
                 <div className="modal-body">
-                  <p>
-                    {modalMessage}
-                  </p>
+                  <p>{modalMessage}</p>
                 </div>
                 <div className="modal-footer">
-                  <Button color="neutral" type="button" style={{ cursor: "default" }}>
-
-                  </Button>
+                  <Button
+                    color="neutral"
+                    type="button"
+                    style={{ cursor: "default" }}
+                  ></Button>
                   <Button
                     color="danger"
                     type="button"
                     onClick={() => setDemoModal(false)}
                   >
                     Close
-                            </Button>
-                  <Button color="neutral" type="button" style={{ cursor: "default" }}>
-
                   </Button>
+                  <Button
+                    color="neutral"
+                    type="button"
+                    style={{ cursor: "default" }}
+                  ></Button>
                 </div>
               </Modal>
               <Row>
@@ -246,12 +245,22 @@ export default function RegisterPage() {
                             .
                           </Label>
                         </FormGroup>
-                        <Button  type='submit'  className="btn-round" color="primary" size="sm" style={{display:"none"}}>  
-                        </Button>
+                        <Button
+                          type="submit"
+                          className="btn-round"
+                          color="primary"
+                          size="sm"
+                          style={{ display: "none" }}
+                        ></Button>
                       </Form>
                     </CardBody>
                     <CardFooter>
-                      <Button className="btn-round" color="primary" size="lg" onClick={handleSubmit}>
+                      <Button
+                        className="btn-round"
+                        color="primary"
+                        size="lg"
+                        onClick={handleSubmit}
+                      >
                         Get Started
                       </Button>
                     </CardFooter>
