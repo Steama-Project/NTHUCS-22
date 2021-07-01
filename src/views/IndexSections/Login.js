@@ -61,7 +61,7 @@ export default function Signup() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3001/users/login", {
+    fetch(`${process.env.REACT_APP_API}/users/login`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

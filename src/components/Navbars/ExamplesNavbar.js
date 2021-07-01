@@ -52,7 +52,7 @@ export default function ExamplesNavbar({ Register, Login }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/users/logout", {
+    fetch(`${process.env.REACT_APP_API}/users/logout`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

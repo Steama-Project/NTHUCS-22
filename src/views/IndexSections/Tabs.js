@@ -70,7 +70,7 @@ export default function Tabs() {
   const saveQuestion = (e) => {
     e.preventDefault();
     const postData = [...sections, ...sections2, ...sections3];
-    fetch("http://localhost:3001/question", {
+    fetch(`${process.env.REACT_APP_API}/question`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export default function Tabs() {
     e.preventDefault();
     const postInfo = { sex, city, dob, isDevelopingChild, isChildWithNeeds };
 
-    fetch("http://localhost:3001/users/me", {
+    fetch(`${process.env.REACT_APP_API}/users/me`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

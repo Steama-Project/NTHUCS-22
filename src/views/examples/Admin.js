@@ -44,7 +44,7 @@ export default function LandingPage() {
 
   const handleGenerateSchedule = () => {
     axios({
-      url: "http://localhost:3001/question/download-report",
+      url: `${process.env.REACT_APP_API}/question/download-report`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
