@@ -20,6 +20,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "views/IndexSections/Login.js";
 import Home from "views/IndexSections/Home.js";
 import Register from "views/IndexSections/Register";
+import Game from "views/examples/Game"
 import {selectCurrentUser} from './redux/user/user-selector';
 import { useSelector } from "react-redux";
 
@@ -42,6 +43,7 @@ export default function Index() {
             <Route exact path="/components" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Login {...props} />)} /> 
             <Route exact path="/home-page" render={(props) => currentUser? (<Home {...props}/> ) : (<Redirect to='/components' />)}/>
             <Route exact path="/register-page" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Register {...props} />)} />
+            <Route exact path="/game-page" render={(props) => !currentUser? (<Redirect to ='/components'/> ) : (<Game {...props} />)} />
             <Redirect from="/" to="/components" />
         </Switch>
         </div>
