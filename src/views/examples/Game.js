@@ -27,15 +27,13 @@ import { useSelector } from "react-redux";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
-//import { makeStyles, useTheme  } from '@material-ui/core/styles';
+
 import { makeStyles } from '@material-ui/core/styles';
-//import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-//import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -47,13 +45,7 @@ import PauseCircleFilledOutlinedIcon from '@material-ui/icons/PauseCircleFilledO
 
 import Sound from 'react-sound';
 
-
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-// import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-// import SkipNextIcon from '@material-ui/icons/SkipNext';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,16 +100,11 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
   const [date, setDate] = React.useState("")
 
   const classes = useStyles();
-  //const theme = useTheme();
-  //const [expanded, setExpanded] = React.useState(false);
   const [heartColor, setHeartColor] = React.useState("inherit")
   const [heartColor2, setHeartColor2] = React.useState("inherit")
 
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
     const month = new Date().toLocaleString('default', { month: 'long' });
     const year = new Date().getFullYear();
     const day = new Date().getDate();
@@ -136,8 +123,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
 
   return (
     <>
-      <ExamplesNavbar />
-
+    <ExamplesNavbar />
       <div className="wrapper section section-tabs">
         <Container>
           <div className="content-center">
@@ -198,28 +184,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                           onPlaying={handleSongPlaying}
                           onFinishedPlaying={handleSongFinishedPlaying}
                       />
-
-                      
-                      {/* <IconButton
-                        className={clsx(classes.expand, {
-                          [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                      >
-                        <ExpandMoreIcon />
-                      </IconButton> */}
                     </CardActions>
-                  {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <Typography paragraph>Method:</Typography>
-                      <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                        minutes.
-                      </Typography>
-                    </CardContent>
-                  </Collapse> */}
                 </Card>                
               </Col>
 
@@ -270,26 +235,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                       <IconButton>
                         <PlayCircleFilledWhiteIcon fontSize="large" color='primary'/>    
                       </IconButton>
-                      {/* <IconButton
-                        className={clsx(classes.expand, {
-                          [classes.expandOpen]: expanded,
-                        })}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                      >
-                        <ExpandMoreIcon />
-                      </IconButton> */}
                     </CardActions>
-                  {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <Typography paragraph>Method:</Typography>
-                      <Typography paragraph>
-                        Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                        minutes.
-                      </Typography>
-                    </CardContent>
-                  </Collapse> */}
                 </Card>  
               </Col>
             </Row>
