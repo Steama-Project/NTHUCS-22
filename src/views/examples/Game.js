@@ -19,7 +19,7 @@ import React from "react";
 // react plugin used to create charts
 
 // reactstrap components
-import { Row, Col, Container, Button } from "reactstrap";
+import { Row, Col, Container, Button, CardFooter } from "reactstrap";
 
 import { selectCurrentUser } from "views/redux/user/user-selector";
 import { useSelector } from "react-redux";
@@ -40,12 +40,11 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
-import PauseCircleFilledOutlinedIcon from '@material-ui/icons/PauseCircleFilledOutlined';
 
-import Sound from 'react-sound';
+import Speech from 'react-speech';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,23 +92,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Game({handleSongLoading,handleSongPlaying,handleSongFinishedPlaying}) {
-  const currentUser = useSelector((state) => selectCurrentUser(state));
-  //const { token } = currentUser;
 
+
+
+export default function Game() {
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  
   const [date, setDate] = React.useState("")
 
   const classes = useStyles();
   const [heartColor, setHeartColor] = React.useState("inherit")
   const [heartColor2, setHeartColor2] = React.useState("inherit")
 
-  const [isPlaying, setIsPlaying] = React.useState(false);
 
     const month = new Date().toLocaleString('default', { month: 'long' });
     const year = new Date().getFullYear();
     const day = new Date().getDate();
 
+  
     const new_date =  `${month} ${day}, ${year}`
+    const text_to_Speech = `${currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button when you hear a single-tone. You only need to press the red button when you hear the other sounds (not single-tone). Please listen carefully, and try your best to response as soon as possible.`
 
   React.useEffect(() => {
     document.body.classList.toggle("landing-page");
@@ -152,7 +154,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                     />
                     <CardContent>
                       <Typography variant="body2" color="textSecondary" component="p" align="justify"> 
-                      “{currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button. When you hear a single-tone (plesase show the dingle-tone right away to help kid understan what is single-tone). You only need to press the red button, when you hear the other sounds (not single-tone). Please listen carefully, and try your best tp response as soon as possible.”
+                      "{text_to_Speech}"
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
@@ -162,6 +164,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                       <IconButton aria-label="share">
                         <ShareIcon />
                       </IconButton>
+                      
                       <Button variant="contained" color="primary"  className='nav-link d-lg-block'>
                       <i className="tim-icons icon-tap-02"/>
                       {" "}
@@ -172,19 +175,17 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                         {" "}
                           Trial  
                       </Button>
-                      <IconButton onClick={() => setIsPlaying(!isPlaying)}>
-                        {!isPlaying? <PlayCircleFilledWhiteIcon fontSize="large" color='primary'/> : <PauseCircleFilledOutlinedIcon fontSize="large" color='primary'/>}                         
-                      </IconButton>
-                      <Sound
-                          //url={`${process.env.REACT_APP_API}/Akon.mp3`}
-                          url=""
-                          playStatus={isPlaying?Sound.status.PLAYING:Sound.status.STOPPED}
-                          playFromPosition={300}
-                          onLoading={handleSongLoading}
-                          onPlaying={handleSongPlaying}
-                          onFinishedPlaying={handleSongFinishedPlaying}
-                      />
                     </CardActions>
+   
+                    <CardFooter>
+                    <Speech 
+                            text={text_to_Speech}
+                            voice ="Daniel"                   
+                            textAsButton={true}
+                            displayText="Play"
+                            lang= "EN-US"
+                          />
+                    </CardFooter>
                 </Card>                
               </Col>
 
@@ -212,7 +213,7 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                     />
                     <CardContent>
                       <Typography variant="body2" color="textSecondary" component="p" align="justify">
-                      “{currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button. When you hear a single-tone (plesase show the dingle-tone right away to help kid understan what is single-tone). You only need to press the red button, when you hear the other sounds (not single-tone). Please listen carefully, and try your best tp response as soon as possible.”
+                      "{text_to_Speech}"
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
@@ -232,10 +233,17 @@ export default function Game({handleSongLoading,handleSongPlaying,handleSongFini
                         {" "}
                           Trial  
                       </Button>
-                      <IconButton>
-                        <PlayCircleFilledWhiteIcon fontSize="large" color='primary'/>    
-                      </IconButton>
                     </CardActions>
+
+                    <CardFooter>
+                    <Speech 
+                            text={text_to_Speech}
+                            voice ="Daniel"                   
+                            textAsButton={true}
+                            displayText="Play"
+                            lang= "EN-US"         
+                          />
+                    </CardFooter>
                 </Card>  
               </Col>
             </Row>
