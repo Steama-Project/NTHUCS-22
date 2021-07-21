@@ -63,7 +63,6 @@ export default function LandingPage() {
           <div className="content-center">
             <Row className="row-grid justify-content-between align-items-center text-left ml-auto mr-auto">
               <Col lg="12" md="0">
-                {/* <Tabs/> */}
                 <AdminTab />
                 <Button
                   className="nav-link d-lg-block"

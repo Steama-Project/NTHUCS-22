@@ -47,6 +47,8 @@ import ReactDatetime from "react-datetime";
 import Accordeon from "../../components/accordeon/Accordeon";
 import { selectCurrentUser } from "views/redux/user/user-selector";
 
+import { useHistory } from "react-router-dom";
+
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
   const [textTabs, setTextTabs] = React.useState(4);
@@ -59,6 +61,8 @@ export default function Tabs() {
   const sections = useSelector((state) => selectSections(state));
   const sections2 = useSelector((state) => selectSections2(state));
   const sections3 = useSelector((state) => selectSections3(state));
+
+  const history = useHistory();
 
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { token } = currentUser;
@@ -77,13 +81,17 @@ export default function Tabs() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ questions: postData }),
+    }).then(response => response.json())
+    .then(data => {
+      if(data._id){
+        history.push("/game-page");
+      }
     });
   };
 
   const saveInfo = (e) => {
     e.preventDefault();
     const postInfo = { sex, city, dob, isDevelopingChild, isChildWithNeeds };
-
     fetch(`${process.env.REACT_APP_API}/users/me`, {
       method: "PATCH",
       headers: {
@@ -94,7 +102,6 @@ export default function Tabs() {
     });
   };
 
-  console.log(city, isDevelopingChild, isChildWithNeeds, sex, dob);
 
   return (
     <div className="section section-tabs">
@@ -150,6 +157,7 @@ export default function Tabs() {
                             className: "form-control",
                           }}
                           onChange={handleChange}
+                          
                         />
                       </FormGroup>
 
@@ -206,6 +214,7 @@ export default function Tabs() {
                   className="nav-link d-lg-block"
                   color="primary"
                   onClick={saveInfo}
+                  
                 >
                   {" "}
                   Save{" "}
