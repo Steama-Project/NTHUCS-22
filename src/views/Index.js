@@ -20,13 +20,13 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "views/IndexSections/Login.js";
 import Home from "views/IndexSections/Home.js";
 import Register from "views/IndexSections/Register";
-import Game from "views/examples/Game"
-import {selectCurrentUser} from './redux/user/user-selector';
+import Game from "views/examples/Game";
+import PictureGame from "views/examples/PictureGame";
+import { selectCurrentUser } from "./redux/user/user-selector";
 import { useSelector } from "react-redux";
 
 export default function Index() {
-
-  const currentUser = useSelector(state => selectCurrentUser(state));
+  const currentUser = useSelector((state) => selectCurrentUser(state));
 
   React.useEffect(() => {
     document.body.classList.toggle("index-page");
@@ -34,18 +34,69 @@ export default function Index() {
     return function cleanup() {
       document.body.classList.toggle("index-page");
     };
-  },[]);
+  }, []);
   return (
     <>
       <div className="wrapper">
         <div className="main">
           <Switch>
-            <Route exact path="/components" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Login {...props} />)} /> 
-            <Route exact path="/home-page" render={(props) => currentUser? (<Home {...props}/> ) : (<Redirect to='/components' />)}/>
-            <Route exact path="/register-page" render={(props) => currentUser? (<Redirect to ='/home-page'/> ) : (<Register {...props} />)} />
-            <Route exact path="/game-page" render={(props) => !currentUser? (<Redirect to ='/components'/> ) : (<Game {...props} />)} />
+            <Route
+              exact
+              path="/components"
+              render={(props) =>
+                currentUser ? (
+                  <Redirect to="/home-page" />
+                ) : (
+                  <Login {...props} />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/home-page"
+              render={(props) =>
+                currentUser ? (
+                  <Home {...props} />
+                ) : (
+                  <Redirect to="/components" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/register-page"
+              render={(props) =>
+                currentUser ? (
+                  <Redirect to="/home-page" />
+                ) : (
+                  <Register {...props} />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/game-page"
+              render={(props) =>
+                !currentUser ? (
+                  <Redirect to="/components" />
+                ) : (
+                  <Game {...props} />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/picture-game"
+              render={(props) =>
+                !currentUser ? (
+                  <Redirect to="/components" />
+                ) : (
+                  <PictureGame {...props} />
+                )
+              }
+            />
             <Redirect from="/" to="/components" />
-        </Switch>
+          </Switch>
         </div>
       </div>
     </>

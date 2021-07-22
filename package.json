@@ -58,6 +58,8 @@
     "react-scripts": "4.0.1",
     "react-sound": "^1.2.0",
     "react-speech": "^1.0.2",
+    "react-timer-hook": "^3.0.4",
+    "react-useinterval": "^1.0.2",
     "reactstrap": "8.7.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
