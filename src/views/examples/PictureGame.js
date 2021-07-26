@@ -13,6 +13,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 450,
@@ -158,7 +159,7 @@ export default function PictureGame() {
     setPictureShownTimestamp(+new Date());
     setPlayButtonClicked(false);
 
-    if (sampleSpace.length > 0) setgameEnded(true);
+    if (sampleSpace.length < 0) setgameEnded(true);
   };
 
   const recordInteraction = (clickedByUser) => {
@@ -175,6 +176,8 @@ export default function PictureGame() {
       setPlayButtonClicked(true);
     }
   };
+
+  
 
   return (
     <>

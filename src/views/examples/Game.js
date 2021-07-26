@@ -41,6 +41,8 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
+import { useHistory } from "react-router-dom";
+
 import Speech from 'react-speech';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -109,9 +111,16 @@ export default function Game() {
     const year = new Date().getFullYear();
     const day = new Date().getDate();
 
+    const history = useHistory();
+
   
     const new_date =  `${month} ${day}, ${year}`
     const text_to_Speech = `${currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button when you hear a single-tone. You only need to press the red button when you hear the other sounds (not single-tone). Please listen carefully, and try your best to response as soon as possible.`
+
+    const routeToPictureGame = (e) => {
+      e.preventDefault();
+      history.push('/picture-game')
+    }
 
   React.useEffect(() => {
     document.body.classList.toggle("landing-page");
@@ -165,7 +174,12 @@ export default function Game() {
                         <ShareIcon />
                       </IconButton>
                       
-                      <Button variant="contained" color="primary"  className='nav-link d-lg-block'>
+                      <Button 
+                      variant="contained" 
+                      color="primary"  
+                      className='nav-link d-lg-block'
+                      onClick={routeToPictureGame}
+                      >
                       <i className="tim-icons icon-tap-02"/>
                       {" "}
                           Take test
