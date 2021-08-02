@@ -113,10 +113,10 @@ export default function PictureGame() {
       setStimulusIntervalDurationCounter(stimulusIntervalDurationCounter + 1);
 
       if (stimulusShownDurationCounter === 250) {
-        setPic(22); // set blank pic
         setStimulusIntervalDurationCounter(0);
         setDisplayMode(false);
         recordInteraction(false);
+        setPic(22); // set blank pic
       }
       handleStimulusInterval(currentInterval);
 
@@ -143,7 +143,6 @@ export default function PictureGame() {
   useInterval(picShowCounter, 1);
 
   const getNextPic = () => {
-    setDisplayedPicturesCounter(displayedPicturesCounter + 1);
     let randomIndex = Math.floor(Math.random() * sampleSpace.length);
     const pictureType = sampleSpace.splice(randomIndex, 1)[0];
     if (pictureType === "Target") {
@@ -156,10 +155,10 @@ export default function PictureGame() {
     }
 
     setDisplayMode(true);
-    setPictureShownTimestamp(+new Date());
+    setDisplayedPicturesCounter(displayedPicturesCounter + 1);
+    let currentTime = Date.now();
+    setPictureShownTimestamp(currentTime);
     setPlayButtonClicked(false);
-
-    if (sampleSpace.length < 0) setgameEnded(true);
   };
 
   const recordInteraction = (clickedByUser) => {
@@ -168,16 +167,23 @@ export default function PictureGame() {
         trial: displayedPicturesCounter,
         pictureShownTimestamp,
         playButtonClicked: clickedByUser,
-        playButtonClickedTimestamp: clickedByUser ? +new Date() : null,
+        playButtonClickedTimestamp: clickedByUser ? Date.now() : null,
         currentPictureType,
       };
 
       gameData.push(data);
       setPlayButtonClicked(true);
+      if (sampleSpace.length === 0) {
+        setgameStarted(false);
+        calC();
+      }
     }
   };
 
-  
+  const calC = () => {
+    console.log(gameData);
+    gameData.forEach((item, index) => {});
+  };
 
   return (
     <>
