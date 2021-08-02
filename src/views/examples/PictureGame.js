@@ -156,7 +156,7 @@ export default function PictureGame() {
 
     setDisplayMode(true);
     setDisplayedPicturesCounter(displayedPicturesCounter + 1);
-    let currentTime = Date.now();
+    let currentTime = stimulusShownDurationCounter;
     setPictureShownTimestamp(currentTime);
     setPlayButtonClicked(false);
   };
@@ -165,9 +165,10 @@ export default function PictureGame() {
     if (displayMode && !playButtonClicked) {
       let data = {
         trial: displayedPicturesCounter,
-        pictureShownTimestamp,
         playButtonClicked: clickedByUser,
-        playButtonClickedTimestamp: clickedByUser ? Date.now() : null,
+        playButtonClickedTimestamp: clickedByUser
+          ? stimulusShownDurationCounter
+          : null,
         currentPictureType,
       };
 
