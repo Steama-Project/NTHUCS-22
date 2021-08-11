@@ -16,7 +16,7 @@ import useInterval from "react-useinterval";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 450,
+    maxWidth: 500,
     marginTop: 20,
   },
   media: {
@@ -74,13 +74,13 @@ export default function PictureGame() {
   const [stimulusIntervalDurationCounter, setStimulusIntervalDurationCounter] =
     useState(0);
   const [displayedPicturesCounter, setDisplayedPicturesCounter] = useState(0);
-  const [intervalOrder, setIntervalOrder] = useState([1000, 3000, 1500]);
+  const [intervalOrder, ] = useState([1000, 3000, 1500]);
   const [currentInterval, setCurrentInterval] = useState(1000);
   const [currentPictureType, setCurrentPictureType] = useState();
-  const [pictureShownTimestamp, setPictureShownTimestamp] = useState(); //timestamp when picture is show
+  //const [pictureShownTimestamp, setPictureShownTimestamp] = useState(); //timestamp when picture is show
   const [displayMode, setDisplayMode] = useState();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
-  const [gameData, setGameData] = useState([]);
+  const [gameData, ] = useState([]);
 
   useEffect(() => {
     intializeSampleSpace();
@@ -155,8 +155,8 @@ export default function PictureGame() {
 
     setDisplayMode(true);
     setDisplayedPicturesCounter(displayedPicturesCounter + 1);
-    let currentTime = stimulusShownDurationCounter;
-    setPictureShownTimestamp(currentTime);
+    //let currentTime = stimulusShownDurationCounter;
+    //setPictureShownTimestamp(currentTime);
     setPlayButtonClicked(false);
   };
 
@@ -221,7 +221,7 @@ export default function PictureGame() {
       meanSumTotal[i] = !(arraySum1[i] + arraySum3[i] === 0)? (meanSum1[i] + meanSum2[i]) / (arraySum1[i] + arraySum3[i]):0;
     }
 
-    // calculate the total sum for each array
+    // calculate the total sum for each 
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     const data = {
@@ -261,22 +261,22 @@ export default function PictureGame() {
         quarter4: impulseTime100[3]
       },
       totalMeanReaction: {
-        total: meanSumTotal.reduce(reducer,0),
-        quarter1: meanSumTotal[0],
-        quarter2: meanSumTotal[1],
-        quarter3: meanSumTotal[2],
-        quarter4: meanSumTotal[3]
+        total: Math.round(meanSumTotal.reduce(reducer,0)),
+        quarter1: Math.round(meanSumTotal[0]),
+        quarter2: Math.round(meanSumTotal[1]),
+        quarter3: Math.round(meanSumTotal[2]),
+        quarter4: Math.round(meanSumTotal[3])
       },
       meanReaction: {
-        total: meanSum1.reduce(reducer,0),
-        quarter1: meanSum1[0],
-        quarter2: meanSum1[1],
-        quarter3: meanSum1[2],
-        quarter4: meanSum1[3]
+        total: Math.round(meanSum1.reduce(reducer,0)),
+        quarter1: Math.round(meanSum1[0]),
+        quarter2: Math.round(meanSum1[1]),
+        quarter3: Math.round(meanSum1[2]),
+        quarter4: Math.round(meanSum1[3])
       },
     }
     // you can console data here to check correctness
-    //console.log(data)
+    console.log(data)
   };
 
   // calculate impulse time when reaction time is less than 100 seconds
