@@ -9,10 +9,10 @@ import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
+import ReactAudioPlayer from 'react-audio-player';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PictureGame() {
+export default function SoundGame() {
   const classes = useStyles();
   const [pic, setPic] = useState();
   const [sampleSpace, setSampleSpace] = useState([]);
@@ -115,7 +115,7 @@ export default function PictureGame() {
         setStimulusIntervalDurationCounter(0);
         setDisplayMode(false);
         recordInteraction(false);
-        setPic(22); // set blank pic
+        //setPic(22); // set blank pic
       }
       handleStimulusInterval(currentInterval);
 
@@ -337,11 +337,12 @@ export default function PictureGame() {
               <Col className="ml-auto mr-auto" md="10" xl="8">
                 <Card className={classes.root}>
                   {gameStarted && (
-                    <CardMedia
-                      className={classes.media}
-                      image={require(`assets/game_pics/${pic}.png`).default}
-                      title="Kid Images1"
-                    />
+                    <ReactAudioPlayer
+                        src={require(`assets/game_sounds/${pic}.wav`).default}
+                        autoPlay
+                        controls
+                        volume={1}
+                        />
                   )}
                   <CardContent></CardContent>
                   <CardActions disableSpacing>
