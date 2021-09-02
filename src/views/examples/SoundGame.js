@@ -216,7 +216,6 @@ export default function SoundGame() {
     for(let i=0; i<meanSum2.length; i++){
       meanSum2[i] = !(arraySum3[i] === 0)? meanSum2[i] / arraySum3[i] : 0;
     }
-
     for(let i=0; i<meanSumTotal.length; i++){
       meanSumTotal[i] = !(arraySum1[i] + arraySum3[i] === 0)? (meanSum1[i] + meanSum2[i]) / (arraySum1[i] + arraySum3[i]):0;
     }

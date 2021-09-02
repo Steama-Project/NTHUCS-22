@@ -283,15 +283,15 @@ export default function PictureGame() {
   // calculate impulse time when reaction time is less than 100 seconds
   const saveImpulseTime100 = (impulseTime100, index, reactionTime) => {
     if(index <= 30){
-      impulseTime100[0] = impulseTime100[0]+reactionTime;
+      impulseTime100[0] = impulseTime100[0]+1;
     }
     else if(index >= 31 && index <= 60 ){
-      impulseTime100[1] = impulseTime100[1]+reactionTime;
+      impulseTime100[1] = impulseTime100[1]+1;
     }
     else if(index >= 61 && index <= 90 ){
-      impulseTime100[2] = impulseTime100[2]+reactionTime;
+      impulseTime100[2] = impulseTime100[2]+1;
     }else{
-      impulseTime100[3] = impulseTime100[3]+reactionTime;
+      impulseTime100[3] = impulseTime100[3]+1;
     }  
   }
 
