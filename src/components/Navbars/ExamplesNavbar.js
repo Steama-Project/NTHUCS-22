@@ -61,7 +61,6 @@ export default function ExamplesNavbar({ Register, Login }) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         dispatch(setCurrentUser(null));
       })
       .catch((err) => console.log(err));

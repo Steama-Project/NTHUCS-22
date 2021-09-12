@@ -184,7 +184,6 @@ export default function SoundGame() {
       };
 
       gameData.push(data);
-      console.log(data)
       setPlayButtonClicked(true);
       if (sampleSpace.length === 0) {
         setgameStarted(false);
@@ -290,7 +289,6 @@ export default function SoundGame() {
     },
     }
     // you can console data here to check correctness
-    console.log(data);
     saveSoundApi(data);
  
   };

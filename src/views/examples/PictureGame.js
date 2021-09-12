@@ -183,7 +183,6 @@ export default function PictureGame() {
       };
 
       gameData.push(data);
-      console.log(data);
       setPlayButtonClicked(true);
       if (sampleSpace.length === 0) {
         setgameStarted(false);
@@ -290,7 +289,6 @@ export default function PictureGame() {
     },
     }
     // you can console data here to check correctness
-    console.log(data)
     savePictureApi(data);
   };
 

@@ -266,7 +266,6 @@ const INITIAL_STATE = {
 const directoryReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
       case questionsTypes.UPDATE_QUESTION:
-        console.log(action.payload)
         const {answerKey, answerValue, section, questionId} = action.payload;
         const questionSection = state[section]
         questionSection.forEach((question) => {
