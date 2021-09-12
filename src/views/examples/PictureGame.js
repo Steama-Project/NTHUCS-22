@@ -6,6 +6,8 @@ import { Row, Col, Container, Button } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
+import { useSelector } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,6 +15,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
+import { selectCurrentUser } from "views/redux/user/user-selector";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,9 +83,23 @@ export default function PictureGame() {
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const [gameData, ] = useState([]);
 
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { token } = currentUser;
+
   useEffect(() => {
     intializeSampleSpace();
   }, []);
+
+  const savePictureApi = (data) => {
+    fetch(`${process.env.REACT_APP_API}/picture`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+  };
 
   const intializeSampleSpace = () => {
     const weightedData = [
@@ -220,6 +237,7 @@ export default function PictureGame() {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     const data = {
+      picturesData:{
       condition1: {
         total: arraySum1.reduce(reducer,0),
         quarter1: arraySum1[0],
@@ -268,11 +286,12 @@ export default function PictureGame() {
         quarter2: Math.round(meanSum1[1]),
         quarter3: Math.round(meanSum1[2]),
         quarter4: Math.round(meanSum1[3])
-      },
+      }
+    },
     }
     // you can console data here to check correctness
     console.log(data)
- 
+    savePictureApi(data);
   };
 
   // calculate impulse time when reaction time is less than 100 seconds

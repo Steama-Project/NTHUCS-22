@@ -6,6 +6,9 @@ import { Row, Col, Container, Button } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
+
+import { useSelector } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,6 +16,7 @@ import CardActions from "@material-ui/core/CardActions";
 import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
 import ReactAudioPlayer from 'react-audio-player';
+import { selectCurrentUser } from "views/redux/user/user-selector";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,14 +81,26 @@ export default function SoundGame() {
   const [intervalOrder, ] = useState([1000, 3000, 1500]);
   const [currentInterval, setCurrentInterval] = useState(1000);
   const [currentPictureType, setCurrentPictureType] = useState();
-  //const [pictureShownTimestamp, setPictureShownTimestamp] = useState(); //timestamp when picture is show
-  const [displayMode, setDisplayMode] = useState();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const [gameData, ] = useState([]);
+
+  const currentUser = useSelector((state) => selectCurrentUser(state));
+  const { token } = currentUser;
 
   useEffect(() => {
     intializeSampleSpace();
   }, []);
+
+  const saveSoundApi = (data) => {
+    fetch(`${process.env.REACT_APP_API}/sound`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+  };
 
   const intializeSampleSpace = () => {
     const weightedData = [
@@ -112,9 +128,7 @@ export default function SoundGame() {
       setStimulusIntervalDurationCounter(stimulusIntervalDurationCounter + 1);
 
       if (stimulusShownDurationCounter === 250) {
-        setStimulusIntervalDurationCounter(0);
-        setDisplayMode(false);
-        recordInteraction(false);
+        setStimulusIntervalDurationCounter(0); 
         //setPic(22); // set blank pic
       }
       handleStimulusInterval(currentInterval);
@@ -129,6 +143,7 @@ export default function SoundGame() {
   const handleStimulusInterval = (currentStimulusDuration) => {
     if (stimulusIntervalDurationCounter === currentStimulusDuration) {
       setStimulusShownDurationCounter(0);
+      recordInteraction(false);
       getNextPic();
 
       if (displayedPicturesCounter % 20 === 0) {
@@ -153,15 +168,12 @@ export default function SoundGame() {
       setCurrentPictureType("Prohibit");
     }
 
-    setDisplayMode(true);
     setDisplayedPicturesCounter(displayedPicturesCounter + 1);
-    //let currentTime = stimulusShownDurationCounter;
-    //setPictureShownTimestamp(currentTime);
     setPlayButtonClicked(false);
   };
 
   const recordInteraction = (clickedByUser) => {
-    if (displayMode && !playButtonClicked) {
+    if (!playButtonClicked) {
       let data = {
         trial: displayedPicturesCounter,
         playButtonClicked: clickedByUser,
@@ -172,6 +184,7 @@ export default function SoundGame() {
       };
 
       gameData.push(data);
+      console.log(data)
       setPlayButtonClicked(true);
       if (sampleSpace.length === 0) {
         setgameStarted(false);
@@ -224,6 +237,7 @@ export default function SoundGame() {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     const data = {
+      soundsData: {
       condition1: {
         total: arraySum1.reduce(reducer,0),
         quarter1: arraySum1[0],
@@ -272,10 +286,12 @@ export default function SoundGame() {
         quarter2: Math.round(meanSum1[1]),
         quarter3: Math.round(meanSum1[2]),
         quarter4: Math.round(meanSum1[3])
-      },
+      }
+    },
     }
     // you can console data here to check correctness
-    console.log(data)
+    console.log(data);
+    saveSoundApi(data);
  
   };
 

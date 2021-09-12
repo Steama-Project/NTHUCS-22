@@ -122,6 +122,11 @@ export default function Game() {
       history.push('/picture-game')
     }
 
+    const routeToSoundGame = (e) => {
+      e.preventDefault();
+      history.push('/sound-game')
+    }
+
   React.useEffect(() => {
     document.body.classList.toggle("landing-page");
     // Specify how to clean up after this effect:
@@ -237,7 +242,12 @@ export default function Game() {
                       <IconButton aria-label="share">
                         <ShareIcon />
                       </IconButton>
-                      <Button variant="contained" color="primary"  className='nav-link d-lg-block'>
+                      <Button 
+                      variant="contained" 
+                      color="primary"  
+                      className='nav-link d-lg-block'
+                      onClick={routeToSoundGame}
+                      >
                       <i className="tim-icons icon-tap-02"/>
                       {" "}
                           Take test
