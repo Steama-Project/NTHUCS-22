@@ -77,8 +77,6 @@ export default function PictureGame() {
   const [intervalOrder, ] = useState([1000, 3000, 1500]);
   const [currentInterval, setCurrentInterval] = useState(1000);
   const [currentPictureType, setCurrentPictureType] = useState();
-  //const [pictureShownTimestamp, setPictureShownTimestamp] = useState(); //timestamp when picture is show
-  const [displayMode, setDisplayMode] = useState();
   const [playButtonClicked, setPlayButtonClicked] = useState(false);
   const [gameData, ] = useState([]);
 
@@ -113,8 +111,6 @@ export default function PictureGame() {
 
       if (stimulusShownDurationCounter === 250) {
         setStimulusIntervalDurationCounter(0);
-        setDisplayMode(false);
-        recordInteraction(false);
         setPic(22); // set blank pic
       }
       handleStimulusInterval(currentInterval);
@@ -129,6 +125,7 @@ export default function PictureGame() {
   const handleStimulusInterval = (currentStimulusDuration) => {
     if (stimulusIntervalDurationCounter === currentStimulusDuration) {
       setStimulusShownDurationCounter(0);
+      recordInteraction(false);
       getNextPic();
 
       if (displayedPicturesCounter % 20 === 0) {
@@ -153,15 +150,12 @@ export default function PictureGame() {
       setCurrentPictureType("Prohibit");
     }
 
-    setDisplayMode(true);
     setDisplayedPicturesCounter(displayedPicturesCounter + 1);
-    //let currentTime = stimulusShownDurationCounter;
-    //setPictureShownTimestamp(currentTime);
     setPlayButtonClicked(false);
   };
 
   const recordInteraction = (clickedByUser) => {
-    if (displayMode && !playButtonClicked) {
+    if (!playButtonClicked) {
       let data = {
         trial: displayedPicturesCounter,
         playButtonClicked: clickedByUser,
@@ -172,6 +166,7 @@ export default function PictureGame() {
       };
 
       gameData.push(data);
+      console.log(data);
       setPlayButtonClicked(true);
       if (sampleSpace.length === 0) {
         setgameStarted(false);
