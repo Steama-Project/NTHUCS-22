@@ -259,7 +259,8 @@ const INITIAL_STATE = {
           answerValue: "",
           section: "sections3",
         }
-      ]                    
+      ],    
+      disable: true              
 };
 
 const directoryReducer = (state = INITIAL_STATE, action) => {
@@ -279,6 +280,11 @@ const directoryReducer = (state = INITIAL_STATE, action) => {
           ...state,
           [section]: questionSection
       }
+    case questionsTypes.TOGGLE_DISABLE:
+      return {
+        ...state,
+        disable: !state.disable
+    }
         default:
          return state;
     }

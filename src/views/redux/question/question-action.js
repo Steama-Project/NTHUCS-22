@@ -1,8 +1,10 @@
 import {questionsTypes} from './question-types'
 
-const updateQuestion = (data) => ({
+export const updateQuestion = (data) => ({
     type: questionsTypes.UPDATE_QUESTION,
     payload: data
 })
 
-export default updateQuestion;
+export const toggleDisable = () => ({
+    type: questionsTypes.TOGGLE_DISABLE,
+})

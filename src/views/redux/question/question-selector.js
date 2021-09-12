@@ -16,3 +16,7 @@ export const selectSections2 = createSelector(
 export const selectSections3 = createSelector(
     [selectDirectory], (directory) => directory.sections3
 );
+
+export const selectDisable = createSelector(
+    [selectDirectory], (directory) => directory.disable
+);

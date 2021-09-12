@@ -21,6 +21,7 @@ import {
   selectSections,
   selectSections2,
   selectSections3,
+  selectDisable
 } from "../redux/question/question-selector";
 import { useSelector } from "react-redux";
 // reactstrap components
@@ -49,6 +50,7 @@ import { selectCurrentUser } from "views/redux/user/user-selector";
 
 import { useHistory } from "react-router-dom";
 
+
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
   const [textTabs, setTextTabs] = React.useState(4);
@@ -62,10 +64,13 @@ export default function Tabs() {
   const sections2 = useSelector((state) => selectSections2(state));
   const sections3 = useSelector((state) => selectSections3(state));
 
+  const disable = useSelector((state) => selectDisable(state)) 
+
   const history = useHistory();
 
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { token } = currentUser;
+
 
   const handleChange = (e) => {
     setDate(e.format("DD-MM-YYYY"));
@@ -325,6 +330,7 @@ export default function Tabs() {
                   className="nav-link d-lg-block"
                   color="primary"
                   onClick={saveQuestion}
+                  disabled = {disable}
                 >
                   {" "}
                   Save{" "}
