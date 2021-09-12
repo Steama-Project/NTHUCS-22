@@ -10,7 +10,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { useDispatch } from "react-redux";
 import updateQuestion from '../../views/redux/question/question-action'
-import { FormLabel } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +79,7 @@ export default function DetailedAccordion({ text, section, questionId }) {
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
           <FormControl component="fieldset">
-          <FormLabel component="legend">Gender</FormLabel>
+           
             <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange} row>
               <FormControlLabel value="1" control={<Radio />} label="完全沒有" />
               <FormControlLabel value="2" control={<Radio />} label="有一點點" />
