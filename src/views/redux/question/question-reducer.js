@@ -259,13 +259,13 @@ const INITIAL_STATE = {
           answerValue: "",
           section: "sections3",
         }
-      ]                    
+      ],    
+      disable: true              
 };
 
 const directoryReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
       case questionsTypes.UPDATE_QUESTION:
-        console.log(action.payload)
         const {answerKey, answerValue, section, questionId} = action.payload;
         const questionSection = state[section]
         questionSection.forEach((question) => {
@@ -279,6 +279,11 @@ const directoryReducer = (state = INITIAL_STATE, action) => {
           ...state,
           [section]: questionSection
       }
+    case questionsTypes.TOGGLE_DISABLE:
+      return {
+        ...state,
+        disable: !state.disable
+    }
         default:
          return state;
     }

@@ -6,15 +6,16 @@ import { Row, Col, Container, Button } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 
+
 import { useSelector } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
+import ReactAudioPlayer from 'react-audio-player';
 import { selectCurrentUser } from "views/redux/user/user-selector";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PictureGame() {
+export default function SoundGame() {
   const classes = useStyles();
   const [pic, setPic] = useState();
   const [sampleSpace, setSampleSpace] = useState([]);
@@ -90,8 +91,8 @@ export default function PictureGame() {
     intializeSampleSpace();
   }, []);
 
-  const savePictureApi = (data) => {
-    fetch(`${process.env.REACT_APP_API}/picture`, {
+  const saveSoundApi = (data) => {
+    fetch(`${process.env.REACT_APP_API}/sound`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,8 +128,8 @@ export default function PictureGame() {
       setStimulusIntervalDurationCounter(stimulusIntervalDurationCounter + 1);
 
       if (stimulusShownDurationCounter === 250) {
-        setStimulusIntervalDurationCounter(0);
-        setPic(22); // set blank pic
+        setStimulusIntervalDurationCounter(0); 
+        //setPic(22); // set blank pic
       }
       handleStimulusInterval(currentInterval);
 
@@ -227,7 +228,6 @@ export default function PictureGame() {
     for(let i=0; i<meanSum2.length; i++){
       meanSum2[i] = !(arraySum3[i] === 0)? meanSum2[i] / arraySum3[i] : 0;
     }
-
     for(let i=0; i<meanSumTotal.length; i++){
       meanSumTotal[i] = !(arraySum1[i] + arraySum3[i] === 0)? (meanSum1[i] + meanSum2[i]) / (arraySum1[i] + arraySum3[i]):0;
     }
@@ -236,7 +236,7 @@ export default function PictureGame() {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     const data = {
-      picturesData:{
+      soundsData: {
       condition1: {
         total: arraySum1.reduce(reducer,0),
         quarter1: arraySum1[0],
@@ -289,7 +289,8 @@ export default function PictureGame() {
     },
     }
     // you can console data here to check correctness
-    savePictureApi(data);
+    saveSoundApi(data);
+ 
   };
 
   // calculate impulse time when reaction time is less than 100 seconds
@@ -349,11 +350,12 @@ export default function PictureGame() {
               <Col className="ml-auto mr-auto" md="10" xl="8">
                 <Card className={classes.root}>
                   {gameStarted && (
-                    <CardMedia
-                      className={classes.media}
-                      image={require(`assets/game_pics/${pic}.png`).default}
-                      title="Kid Images1"
-                    />
+                    <ReactAudioPlayer
+                        src={require(`assets/game_sounds/${pic}.wav`).default}
+                        autoPlay
+                        controls
+                        volume={1}
+                        />
                   )}
                   <CardContent></CardContent>
                   <CardActions disableSpacing>

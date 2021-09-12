@@ -22,6 +22,7 @@ import Home from "views/IndexSections/Home.js";
 import Register from "views/IndexSections/Register";
 import Game from "views/examples/Game";
 import PictureGame from "views/examples/PictureGame";
+import SoundGame from "./examples/SoundGame";
 import { selectCurrentUser } from "./redux/user/user-selector";
 import { useSelector } from "react-redux";
 
@@ -92,6 +93,17 @@ export default function Index() {
                   <Redirect to="/components" />
                 ) : (
                   <PictureGame {...props} />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/sound-game"
+              render={(props) =>
+                !currentUser ? (
+                  <Redirect to="/components" />
+                ) : (
+                  <SoundGame {...props} />
                 )
               }
             />

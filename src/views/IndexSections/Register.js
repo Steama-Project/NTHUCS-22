@@ -96,7 +96,7 @@ export default function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API}/users`, {
+    fetch(`${process.env.REACT_APP_API}/users`,{
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
