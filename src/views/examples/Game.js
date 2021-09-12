@@ -117,6 +117,7 @@ export default function Game() {
     const new_date =  `${month} ${day}, ${year}`
     const text_to_Speech = `${currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button when you hear a single-tone. You only need to press the red button when you hear the other sounds (not single-tone). Please listen carefully, and try your best to response as soon as possible.`
 
+    const text_to_Speech1 = `${currentUser.user.name}, you will see some pictures in the following test. You don’t need to press the red button, when you see a Prohibit picture. You only need to press the red button , when you see a target picture. Please look carefully, and try your best to response as fast as possible.`
     const routeToPictureGame = (e) => {
       e.preventDefault();
       history.push('/picture-game')
@@ -168,7 +169,7 @@ export default function Game() {
                     />
                     <CardContent>
                       <Typography variant="body2" color="textSecondary" component="p" align="justify"> 
-                      "{text_to_Speech}"
+                      "{text_to_Speech1}"
                       </Typography>
                     </CardContent>
                     <CardActions disableSpacing>
@@ -198,7 +199,7 @@ export default function Game() {
    
                     <CardFooter>
                     <Speech 
-                            text={text_to_Speech}
+                            text={text_to_Speech1}
                             voice ="Daniel"                   
                             textAsButton={true}
                             displayText="Play"
