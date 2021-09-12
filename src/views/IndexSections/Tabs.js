@@ -56,7 +56,7 @@ export default function Tabs() {
   const [dob, setDate] = React.useState("");
   const [city, setCity] = React.useState("Hsinchu");
   const [isDevelopingChild, setDevChil] = React.useState("Yes");
-  const [isChildWithNeeds, setSpeNeeds] = React.useState("Yes");
+  const [isChildWithNeeds, setSpeNeeds] = React.useState("No");
 
   const sections = useSelector((state) => selectSections(state));
   const sections2 = useSelector((state) => selectSections2(state));
@@ -184,8 +184,8 @@ export default function Tabs() {
                           type="select"
                           name="select"
                           id="exampleSelect3"
-                          value={isChildWithNeeds}
-                          onChange={(e) => setSpeNeeds(e.target.value)}
+                          value={isDevelopingChild}
+                          onChange={(e) => setDevChil(e.target.value)}
                         >
                           <option>Yes</option>
                           <option>No</option>
@@ -200,8 +200,8 @@ export default function Tabs() {
                           type="select"
                           name="select"
                           id="exampleSelect4"
-                          value={isDevelopingChild}
-                          onChange={(e) => setDevChil(e.target.value)}
+                          value={isChildWithNeeds}
+                          onChange={(e) => setSpeNeeds(e.target.value)}
                         >
                           <option>Yes</option>
                           <option>No</option>
