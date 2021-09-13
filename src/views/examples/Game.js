@@ -118,15 +118,27 @@ export default function Game() {
     const text_to_Speech = `${currentUser.user.name}, you will hear some kinds of sounds in the following test. You don’t need to press the red button when you hear a single-tone. You only need to press the red button when you hear the other sounds (not single-tone). Please listen carefully, and try your best to response as soon as possible.`
 
     const text_to_Speech1 = `${currentUser.user.name}, you will see some pictures in the following test. You don’t need to press the red button, when you see a Prohibit picture. You only need to press the red button , when you see a target picture. Please look carefully, and try your best to response as fast as possible.`
+    
     const routeToPictureGame = (e) => {
       e.preventDefault();
       history.push('/picture-game')
+    }
+
+    const routeToPictureGameTrial = (e) => {
+      e.preventDefault();
+      history.push('/picture-game-trial')
     }
 
     const routeToSoundGame = (e) => {
       e.preventDefault();
       history.push('/sound-game')
     }
+
+    const routeToSoundGameTrial = (e) => {
+      e.preventDefault();
+      history.push('/sound-game-trial')
+    }
+
 
   React.useEffect(() => {
     document.body.classList.toggle("landing-page");
@@ -190,7 +202,12 @@ export default function Game() {
                       {" "}
                           Take test
                       </Button>
-                      <Button variant="contained" color="primary" className='nav-link d-lg-block'>
+                      <Button 
+                        variant="contained" 
+                        color="primary" 
+                        className='nav-link d-lg-block'
+                        onClick={routeToPictureGameTrial}
+                        >
                       <i className="tim-icons icon-puzzle-10"/>
                         {" "}
                           Trial  
@@ -253,7 +270,12 @@ export default function Game() {
                       {" "}
                           Take test
                       </Button>
-                      <Button variant="contained" color="primary" className='nav-link d-lg-block'>
+                      <Button 
+                      variant="contained" 
+                      color="primary" 
+                      className='nav-link d-lg-block'
+                      onClick={routeToSoundGameTrial}
+                      >
                       <i className="tim-icons icon-puzzle-10"/>
                         {" "}
                           Trial  
