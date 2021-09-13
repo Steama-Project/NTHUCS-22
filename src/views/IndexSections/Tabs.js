@@ -205,7 +205,7 @@ export default function Tabs() {
                           type="select"
                           name="select"
                           id="exampleSelect4"
-                          value={isChildWithNeeds}
+                          value={isDevelopingChild === "Yes"? "No": "Yes"}
                           onChange={(e) => setSpeNeeds(e.target.value)}
                         >
                           <option>Yes</option>
@@ -218,8 +218,7 @@ export default function Tabs() {
                 <Button
                   className="nav-link d-lg-block"
                   color="primary"
-                  onClick={saveInfo}
-                  
+                  onClick={saveInfo}            
                 >
                   {" "}
                   Save{" "}
