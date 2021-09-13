@@ -56,6 +56,8 @@ export default function RegisterPage() {
   const [demoModal, setDemoModal] = React.useState(false);
   const [modalMessage, setmodalMessage] = React.useState({});
 
+  const [isLoading, setIsLoading] = React.useState(false)
+
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
 
@@ -96,24 +98,34 @@ export default function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API}/users`,{
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.user?._id) {
-          dispatch(setCurrentUser(response));
-        } else {
-          setmodalMessage(response.message);
-          setDemoModal(true);
-          setPassword("");
-          setEmail("");
-          setFullName("");
-        }
+    const registerUser = async () => {
+      
+      setIsLoading(true)
+
+       await fetch(`${process.env.REACT_APP_API}/users`,{
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-      .catch((err) => console.log(err));
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.user?._id) {
+            dispatch(setCurrentUser(response));
+            setIsLoading(true)
+          } else {
+            setmodalMessage(response.message);
+            setDemoModal(true);
+            setPassword("");
+            setEmail("");
+            setFullName("");
+            setIsLoading(true)
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
+    registerUser();
+
   };
   return (
     <>
@@ -260,8 +272,9 @@ export default function RegisterPage() {
                         color="primary"
                         size="lg"
                         onClick={handleSubmit}
+                        disabled = {isLoading}
                       >
-                        Get Started
+                        {isLoading? "Registering..." : "Get Started"}
                       </Button>
                     </CardFooter>
                   </Card>

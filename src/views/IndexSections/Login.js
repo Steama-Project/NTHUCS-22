@@ -66,7 +66,7 @@ export default function Signup() {
 
     const loginUser = async () => {
           setIsLoading(true)
-          fetch(`${process.env.REACT_APP_API}/users/login`, {
+         await fetch(`${process.env.REACT_APP_API}/users/login`, {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
