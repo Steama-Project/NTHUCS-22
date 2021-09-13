@@ -351,7 +351,7 @@ export default function PictureGame() {
                   {gameStarted && (
                     <CardMedia
                       className={classes.media}
-                      image={require(`assets/game_pics/${pic}.png`).default}
+                      image={require(`assets/game_pics/${pic}-min.png`).default}
                       title="Kid Images1"
                     />
                   )}
