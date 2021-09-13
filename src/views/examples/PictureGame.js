@@ -17,6 +17,8 @@ import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
 import { selectCurrentUser } from "views/redux/user/user-selector";
 
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 500,
@@ -86,9 +88,16 @@ export default function PictureGame() {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { token } = currentUser;
 
+  const history = useHistory();
+
   useEffect(() => {
     intializeSampleSpace();
   }, []);
+
+  const routeToSoundGame = (e) => {
+    e.preventDefault();
+    history.push('/sound-game')
+  }
 
   const savePictureApi = (data) => {
     fetch(`${process.env.REACT_APP_API}/picture`, {
@@ -376,6 +385,17 @@ export default function PictureGame() {
                     >
                       <i className="tim-icons icon-tap-02" /> Press
                     </Button>
+                    
+
+                  { !gameStarted && <Button
+                      variant="contained"
+                      color="success"
+                      className="nav-link d-lg-block"
+                      disabled={!gameStarted?false:true}
+                      onClick={routeToSoundGame}
+                    >
+                      <i className="tim-icons icon-refresh-02" /> Sound Game
+                    </Button>}
                   </CardActions>
                 </Card>
               </Col>

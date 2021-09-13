@@ -17,6 +17,7 @@ import { red } from "@material-ui/core/colors";
 import useInterval from "react-useinterval";
 import ReactAudioPlayer from 'react-audio-player';
 import { selectCurrentUser } from "views/redux/user/user-selector";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,6 +91,13 @@ export default function SoundGame() {
   useEffect(() => {
     intializeSampleSpace();
   }, []);
+
+  const history = useHistory();
+
+  const routeToPictureGame = (e) => {
+    e.preventDefault();
+    history.push('/picture-game')
+  }
 
   const saveSoundApi = (data) => {
     fetch(`${process.env.REACT_APP_API}/sound`, {
@@ -378,6 +386,16 @@ export default function SoundGame() {
                     >
                       <i className="tim-icons icon-tap-02" /> Press
                     </Button>
+
+                    { !gameStarted && <Button
+                      variant="contained"
+                      color="success"
+                      className="nav-link d-lg-block"
+                      disabled={!gameStarted?false:true}
+                      onClick={routeToPictureGame}
+                    >
+                      <i className="tim-icons icon-refresh-02" /> Picture Game
+                    </Button>}
                   </CardActions>
                 </Card>
               </Col>
