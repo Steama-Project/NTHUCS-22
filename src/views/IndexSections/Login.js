@@ -44,6 +44,7 @@ import {
 import { useDispatch } from "react-redux";
 import setCurrentUser from "../redux/user/user-action";
 
+
 export default function Signup() {
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
@@ -53,6 +54,8 @@ export default function Signup() {
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
 
+  const [isLoading, setIsLoading] = React.useState(false)
+
   const data = {
     email: email,
     password: password,
@@ -61,21 +64,28 @@ export default function Signup() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API}/users/login`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.user?._id) {
-          dispatch(setCurrentUser(response));
-        } else {
-          setmodalMessage(response.message);
-          setDemoModal(true);
-        }
-      })
-      .catch((err) => console.log(err));
+    const loginUser = async () => {
+          setIsLoading(true)
+          fetch(`${process.env.REACT_APP_API}/users/login`, {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              })
+                .then((response) => response.json())
+                .then((response) => {
+                  if (response.user?._id) {
+                    dispatch(setCurrentUser(response));
+                    setIsLoading(false)
+                  } else {
+                    setmodalMessage(response.message);
+                    setDemoModal(true);
+                    setIsLoading(false)
+                  }
+                })
+                .catch((err) => console.log(err));         
+    }
+
+    loginUser();
   };
 
   return (
@@ -206,8 +216,9 @@ export default function Signup() {
                     className="btn-round"
                     color="primary"
                     size="lg"
+                    disabled = {isLoading}
                   >
-                    Get Started
+                    {isLoading? "Login...": "Get Started"}
                   </Button>
                 </CardFooter>
               </Card>
