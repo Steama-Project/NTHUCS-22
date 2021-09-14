@@ -50,6 +50,7 @@ import { selectCurrentUser } from "views/redux/user/user-selector";
 
 import { useHistory } from "react-router-dom";
 
+import Notification from "./Notification";
 
 export default function Tabs() {
   const [iconTabs, setIconsTabs] = React.useState(1);
@@ -71,6 +72,14 @@ export default function Tabs() {
   const currentUser = useSelector((state) => selectCurrentUser(state));
   const { token } = currentUser;
 
+  const [notification, setNotification] = React.useState(false);
+
+  const [disableSave, setDisableSave] = React.useState(false)
+
+  const [modalMessage, setModalMessage] = React.useState("");
+
+  const [which, setWhich] = React.useState("")
+
 
   const handleChange = (e) => {
     setDate(e.format("DD-MM-YYYY"));
@@ -88,8 +97,13 @@ export default function Tabs() {
       body: JSON.stringify({ questions: postData }),
     }).then(response => response.json())
     .then(data => {
-      if(data._id){
-        history.push("/game-page");
+      console.log(data.question._id)
+      if(data.question._id){
+         setNotification(true);
+         setModalMessage(data.message);
+         setWhich("Success")
+         setTimeout(function(){ setNotification(false); }, 3000);
+         setTimeout(function(){ history.push("/game-page"); }, 5000); 
       }
     });
   };
@@ -104,6 +118,21 @@ export default function Tabs() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(postInfo),
+    }).then(response => response.json())
+    .then(data => {
+       if(data.response._id){
+         setNotification(true);
+         setDisableSave(true);
+         setModalMessage(data.message);
+         setWhich("Success")
+         setTimeout(function(){ setNotification(false); }, 3000);   
+       }
+    }).catch((error) => {
+      console.log(error)
+      setNotification(true);
+      setModalMessage(error);
+      setWhich("Fail")
+      setTimeout(function(){ setNotification(false); }, 3000);
     });
   };
 
@@ -112,6 +141,9 @@ export default function Tabs() {
     <div className="section section-tabs">
       <div></div>
       <Container>
+      {
+        notification && <Notification modalMessage={modalMessage} which={which}/>
+      }
         <Row>
           <Col className="ml-auto mr-auto" md="10" xl="6">
             <Card>
@@ -218,8 +250,9 @@ export default function Tabs() {
                 <Button
                   className="nav-link d-lg-block"
                   color="primary"
-                  onClick={saveInfo}            
-                >
+                  onClick={saveInfo}    
+                  disabled = {disableSave}        
+                 >
                   {" "}
                   Save{" "}
                 </Button>
