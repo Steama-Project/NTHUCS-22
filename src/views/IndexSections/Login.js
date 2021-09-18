@@ -74,8 +74,8 @@ export default function Signup() {
                 .then((response) => response.json())
                 .then((response) => {
                   if (response.user?._id) {
-                    dispatch(setCurrentUser(response));
                     setIsLoading(false)
+                    dispatch(setCurrentUser(response));       
                   } else {
                     setmodalMessage(response.message);
                     setDemoModal(true);
@@ -85,7 +85,7 @@ export default function Signup() {
                 .catch((err) => console.log(err));         
     }
 
-    loginUser();
+     loginUser();
   };
 
   return (

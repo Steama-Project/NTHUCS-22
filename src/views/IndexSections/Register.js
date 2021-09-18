@@ -110,8 +110,8 @@ export default function RegisterPage() {
         .then((response) => response.json())
         .then((response) => {
           if (response.user?._id) {
-            dispatch(setCurrentUser(response));
             setIsLoading(true)
+            dispatch(setCurrentUser(response));
           } else {
             setmodalMessage(response.message);
             setDemoModal(true);

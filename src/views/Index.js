@@ -34,6 +34,9 @@ export default function Index() {
   React.useEffect(() => {
     document.body.classList.toggle("index-page");
     // Specify how to clean up after this effect:
+    for(let i=1; i<23; i++){
+      new Image().src = require(`assets/game_pics/${i}-min_optimized.png`).default
+    }
     return function cleanup() {
       document.body.classList.toggle("index-page");
     };
