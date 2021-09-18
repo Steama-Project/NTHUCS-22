@@ -118,7 +118,7 @@ export default function RegisterPage() {
             setPassword("");
             setEmail("");
             setFullName("");
-            setIsLoading(true)
+            setIsLoading(false)
           }
         })
         .catch((err) => console.log(err));
