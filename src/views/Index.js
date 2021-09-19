@@ -28,6 +28,8 @@ import { selectCurrentUser } from "./redux/user/user-selector";
 import { useSelector } from "react-redux";
 import SoundGameTrial from "./examples/SoundTrial";
 
+import ProgressBar from "@badrap/bar-of-progress";
+
 export default function Index() {
   const currentUser = useSelector((state) => selectCurrentUser(state));
 
@@ -41,6 +43,21 @@ export default function Index() {
       document.body.classList.toggle("index-page");
     };
   }, []);
+
+
+  const progress = new ProgressBar({
+    size:4,
+    color:"#E14ECA",
+    className:"z-50",
+    delay:100,
+  });
+
+  progress.start();
+
+  setTimeout(() => {
+    progress.finish();
+  }, 1000);
+
   return (
     <>
       <div className="wrapper">
