@@ -19,6 +19,7 @@ import React from "react";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+import CircularProgress from "../../components/ProgressSpinner/ProgessSpinner"
 
 // reactstrap components
 import {
@@ -210,15 +211,17 @@ export default function Signup() {
                     ></Button>
                   </Form>
                 </CardBody>
-                <CardFooter>
+                <CardFooter >
                   <Button
                     onClick={handleLogin}
                     className="btn-round"
                     color="primary"
                     size="lg"
                     disabled = {isLoading}
+                    style = {{display :"inline-flex"}}
                   >
-                    {isLoading? "Login...": "Get Started"}
+                    <span style={{paddingRight:"10px"}}> { isLoading? <CircularProgress/>:"" }</span>              
+                    <span> { isLoading? "Login...": "Get Started" } </span>
                   </Button>
                 </CardFooter>
               </Card>

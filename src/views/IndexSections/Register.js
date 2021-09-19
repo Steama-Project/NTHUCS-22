@@ -18,6 +18,7 @@
 
 import React from "react";
 import classnames from "classnames";
+import CircularProgress from "../../components/ProgressSpinner/ProgessSpinner"
 // reactstrap components
 import {
   Button,
@@ -273,8 +274,10 @@ export default function RegisterPage() {
                         size="lg"
                         onClick={handleSubmit}
                         disabled = {isLoading}
+                        style = {{display :"inline-flex"}}
                       >
-                        {isLoading? "Registering..." : "Get Started"}
+                        <span style={{paddingRight:"10px"}}> { isLoading? <CircularProgress/>:"" }</span>              
+                        <span> { isLoading? "Registering...": "Get Started" } </span>
                       </Button>
                     </CardFooter>
                   </Card>
